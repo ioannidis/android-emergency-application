@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "225226042678",
+    "firebase_url": "https://instant-service-26437.firebaseio.com",
+    "project_id": "instant-service-26437",
+    "storage_bucket": "instant-service-26437.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225226042678:android:7bce1effc1598a4787d797",
+        "android_client_info": {
+          "package_name": "com.papei.instantservice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "225226042678-trjcbmnk6t2t7c9l3l16137lk1kclujc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.papei.instantservice",
+            "certificate_hash": "6846cc3bcd0eea8ed0f37c459a7f6154c743e4dd"
+          }
+        },
+        {
+          "client_id": "225226042678-ji7hthifmrcra034k6vu3ocudr0rqk80.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPTBR3USGW1I6oHdV8jpB8tmjN-9trK0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "225226042678-ji7hthifmrcra034k6vu3ocudr0rqk80.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

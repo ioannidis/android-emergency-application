@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/doctorMenuItem"
+        android:icon="@drawable/ic_local_hospital_black_24dp"
+        android:title="@string/doctor"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/homeMenuItem"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/alertsMenuItem"
+        android:icon="@drawable/ic_announcement_black_24dp"
+        android:title="@string/alerts"
+        app:showAsAction="ifRoom" />
+</menu>
