@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -17,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.papei.instantservice.alerts.AlertsFragment;
 import com.papei.instantservice.doctor.DoctorFragment;
+import com.papei.instantservice.drive.MainActivity;
 
 public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
@@ -114,5 +117,11 @@ public class HomeActivity extends AppCompatActivity {
     private void signOut() {
         this.firebaseAuth.signOut();
         GoogleSignIn.getClient(this, GoogleSignInOptions.DEFAULT_SIGN_IN).signOut();
+    }
+
+    // Open driving model activity
+    public void drivingModeActivity(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        this.startActivity(intent);
     }
 }

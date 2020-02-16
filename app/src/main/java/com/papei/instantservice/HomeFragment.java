@@ -14,4 +14,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
+
+    // Placeholder
+    public void drivingModeActivity(View view) {
+    }
 }
