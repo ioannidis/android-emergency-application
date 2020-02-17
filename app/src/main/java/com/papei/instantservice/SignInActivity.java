@@ -47,7 +47,7 @@ public class SignInActivity extends AppCompatActivity {
         this.auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
-            startHomeActivity();
+            startFingerprintActivity();
         } else {
             Button signInButton = findViewById(R.id.signInButton);
 
@@ -95,7 +95,7 @@ public class SignInActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            startHomeActivity();
+                            startFingerprintActivity();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -109,9 +109,9 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
-    private void startHomeActivity() {
-        Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
-        startActivity(homeIntent);
+    private void startFingerprintActivity() {
+        Intent fingerprintIntent = new Intent(getApplicationContext(), FingerprintActivity.class);
+        startActivity(fingerprintIntent);
         finish();
     }
 }

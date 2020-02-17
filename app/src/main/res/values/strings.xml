@@ -53,5 +53,8 @@
     <string name="tab_text_1">Main</string>
     <string name="tab_text_2">Violations</string>
     <string name="tab_text_3">Map</string>
+    <string name="sign_in_with_fingerprint">Use fingerprint</string>
+    <string name="security">Be more secure</string>
+    <string name="fingerprint">Please verify your fingerprint</string>
 
 </resources>
