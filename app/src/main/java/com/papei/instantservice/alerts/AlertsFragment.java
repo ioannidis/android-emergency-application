@@ -1,6 +1,7 @@
 package com.papei.instantservice.alerts;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,15 +13,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.messaging.FirebaseMessaging;
+import com.papei.instantservice.FingerprintActivity;
 import com.papei.instantservice.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AlertsFragment extends Fragment {
@@ -43,6 +46,14 @@ public class AlertsFragment extends Fragment {
         this.alertsRecyclerView.setAdapter(this.alertAdapter);
         this.alertListener = createAlertsListener();
         this.alertsProgressLinearLayout = view.findViewById(R.id.alertsProgressLinearLayout);
+
+        FloatingActionButton addAlertFloatingActionButton = view.findViewById(R.id.addAlertFloatingActionButton);
+
+        addAlertFloatingActionButton.setOnClickListener(v -> {
+            Intent fingerprintIntent = new Intent(getContext(), CreateAlertActivity.class);
+            startActivity(fingerprintIntent);
+        });
+
         return view;
     }
 
@@ -74,8 +85,9 @@ public class AlertsFragment extends Fragment {
                     alerts.add(alert);
                 }
 
+                Collections.reverse(alerts);
                 alertAdapter.notifyDataSetChanged();
-                alertsRecyclerView.scrollToPosition(alerts.size() - 1);
+                alertsRecyclerView.scrollToPosition(0);
             }
 
             @Override

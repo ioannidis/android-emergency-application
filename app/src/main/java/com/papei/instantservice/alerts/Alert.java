@@ -1,26 +1,16 @@
 package com.papei.instantservice.alerts;
 
 public class Alert {
-    private String url;
     private String title;
     private String description;
 
-    public Alert(String url, String title, String description) {
-        this.url = url;
+    public Alert(String title, String description) {
         this.title = title;
         this.description = description;
     }
 
     public Alert() {
         //
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getTitle() {

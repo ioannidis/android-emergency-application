@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,49 +8,28 @@
     card_view:cardCornerRadius="5dp">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/alertImageView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-            <TextView
-                android:id="@+id/alertTitleTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/alertImageView"
-                android:background="@android:drawable/screen_background_dark_transparent"
-                android:padding="10dp"
-                android:lineHeight="24dp"
-                android:text="Suspendisse id est volutpat, sollicitudin nisi gravida, egestas mauris"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-        </RelativeLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/alertTitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp">
+            android:lineHeight="24dp"
+            android:text="Suspendisse id est volutpat, sollicitudin nisi gravida, egestas mauris"
+            android:textSize="18sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="10dp"/>
 
-            <TextView
-                android:id="@+id/alertDescriptionTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:lineHeight="24dp"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec diam nunc, rhoncus sed viverra id, volutpat ut metus. Pellentesque scelerisque id ligula sit amet volutpat. Aenean porta lacinia ante et lacinia. Sed suscipit auctor erat sed aliquam. Cras accumsan dolor eu elit mattis, sed pharetra risus bibendum. Vivamus hendrerit, mi ut accumsan bibendum, purus lectus egestas ex, sit amet efficitur odio purus vel lacus. Nullam fermentum erat sed dui aliquam, quis vulputate tortor tempus. Nulla sed nisi convallis est consectetur fermentum."
-                android:textColor="#555555"
-                android:textSize="14dp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/alertDescriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineHeight="24dp"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec diam nunc, rhoncus sed viverra id, volutpat ut metus. Pellentesque scelerisque id ligula sit amet volutpat. Aenean porta lacinia ante et lacinia. Sed suscipit auctor erat sed aliquam. Cras accumsan dolor eu elit mattis, sed pharetra risus bibendum. Vivamus hendrerit, mi ut accumsan bibendum, purus lectus egestas ex, sit amet efficitur odio purus vel lacus. Nullam fermentum erat sed dui aliquam, quis vulputate tortor tempus. Nulla sed nisi convallis est consectetur fermentum."
+            android:textColor="#555555"
+            android:textSize="14sp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

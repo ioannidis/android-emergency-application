@@ -13,6 +13,9 @@
     <string name="doctor">Doctor</string>
     <string name="alerts">Alerts</string>
     <string name="type_your_message">Type your message…</string>
+    <string name="create_alert">Create a new alert</string>
+    <string name="alert_title">Title</string>
+    <string name="alert_description">Description</string>
 
     <!-- Drive package -->
     <string name="driving_mode_title">Driving Mode</string>
