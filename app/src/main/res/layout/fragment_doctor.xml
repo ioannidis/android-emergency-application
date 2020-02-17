@@ -9,14 +9,14 @@
     tools:context=".doctor.DoctorFragment">
 
     <LinearLayout
-        android:id="@+id/progressBarLinearLayout"
+        android:id="@+id/doctorProgressLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
 
         <ProgressBar
-            android:id="@+id/messagesProgressBar"
+            android:id="@+id/doctorProgressBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

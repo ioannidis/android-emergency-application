@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -26,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private ActionBar actionBar;
     private FirebaseUser user;
+    private boolean loadedHomeOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,27 +37,28 @@ public class HomeActivity extends AppCompatActivity {
         this.actionBar = getSupportActionBar();
 
         this.fragmentManager = getSupportFragmentManager();
-        navigateHomeFragment();
+
+        if (!this.loadedHomeOnce) {
+            navigateHomeFragment();
+            this.loadedHomeOnce = true;
+        }
 
         BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
         nav.setSelectedItemId(R.id.homeMenuItem);
 
-        nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.homeMenuItem:
-                        navigateHomeFragment();
-                        return true;
-                    case R.id.doctorMenuItem:
-                        navigateDoctorFragment();
-                        return true;
-                    case R.id.alertsMenuItem:
-                        navigateAlertsFragment();
-                        return true;
-                }
-                return false;
+        nav.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.homeMenuItem:
+                    navigateHomeFragment();
+                    return true;
+                case R.id.doctorMenuItem:
+                    navigateDoctorFragment();
+                    return true;
+                case R.id.alertsMenuItem:
+                    navigateAlertsFragment();
+                    return true;
             }
+            return false;
         });
     }
 

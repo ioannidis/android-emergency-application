@@ -35,7 +35,7 @@ public class DoctorFragment extends Fragment {
     private FirebaseUser user;
     private EditText messageEditText;
     private ValueEventListener valueEventListener;
-    private LinearLayout progressBarLinearLayout, messagesLinearLayout;
+    private LinearLayout doctorProgressLinearLayout, messagesLinearLayout;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class DoctorFragment extends Fragment {
         this.messageEditText = view.findViewById(R.id.messageEditText);
         this.messageEditText.setOnEditorActionListener(createEditorActionListener());
 
-        this.progressBarLinearLayout = view.findViewById(R.id.progressBarLinearLayout);
+        this.doctorProgressLinearLayout = view.findViewById(R.id.doctorProgressLinearLayout);
         this.messagesLinearLayout = view.findViewById(R.id.messagesLinearLayout);
 
         return view;
@@ -80,7 +80,7 @@ public class DoctorFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (messages.isEmpty()) {
-                    progressBarLinearLayout.setVisibility(View.GONE);
+                    doctorProgressLinearLayout.setVisibility(View.GONE);
                     messagesLinearLayout.setVisibility(View.VISIBLE);
                 } else {
                     messages.clear();

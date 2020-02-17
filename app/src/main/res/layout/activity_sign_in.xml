@@ -18,18 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameTextView"
         app:layout_constraintVertical_bias="0.06999999" />
-    <Button
-        android:id="@+id/signInBiometrics"
-        android:layout_width="220dp"
-        android:layout_height="60dp"
-        android:drawableStart="@drawable/fingerprint_dialog_fp_to_error"
-        android:text="@string/sign_in_with_fingerprint"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signInButton"
-        app:layout_constraintVertical_bias="0.06999999" />
 
     <TextView
         android:id="@+id/titleTextView"

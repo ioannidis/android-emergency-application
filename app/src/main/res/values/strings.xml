@@ -10,7 +10,7 @@
     <string name="home">Home</string>
     <string name="doctor">Doctor</string>
     <string name="alerts">Alerts</string>
-    <string name="type_your_message">Type your message...</string>
+    <string name="type_your_message">Type your message…</string>
 
     <!-- Drive package -->
     <string name="driving_mode_title">Driving Mode</string>

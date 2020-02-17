@@ -51,12 +51,9 @@ public class SignInActivity extends AppCompatActivity {
         } else {
             Button signInButton = findViewById(R.id.signInButton);
 
-            signInButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent signInIntent = client.getSignInIntent();
-                    startActivityForResult(signInIntent, SIGN_IN_CODE);
-                }
+            signInButton.setOnClickListener(v -> {
+                Intent signInIntent = client.getSignInIntent();
+                startActivityForResult(signInIntent, SIGN_IN_CODE);
             });
         }
     }
@@ -92,17 +89,9 @@ public class SignInActivity extends AppCompatActivity {
             AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
 
             auth.signInWithCredential(credential)
-                    .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                        @Override
-                        public void onSuccess(AuthResult authResult) {
-                            startFingerprintActivity();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
+                    .addOnSuccessListener(authResult -> startFingerprintActivity())
+                    .addOnFailureListener(e -> {
 
-                        }
                     });
         } catch (ApiException e) {
             Log.w(LOG_TAG, "Google sign in failed", e);

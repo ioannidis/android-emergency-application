@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,7 @@ public class AlertsFragment extends Fragment {
     private RecyclerView alertsRecyclerView;
     private AlertAdapter alertAdapter;
     private ValueEventListener alertListener;
+    private LinearLayout alertsProgressLinearLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,12 +40,13 @@ public class AlertsFragment extends Fragment {
 
         this.alertsRecyclerView = view.findViewById(R.id.alertsRecyclerView);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        manager.setStackFromEnd(true);
         this.alertsRecyclerView.setLayoutManager(manager);
         this.alertAdapter = new AlertAdapter(this.alerts);
         this.alertsRecyclerView.setAdapter(this.alertAdapter);
 
         this.alertListener = createAlertsListener();
+
+        this.alertsProgressLinearLayout = view.findViewById(R.id.alertsProgressLinearLayout);
 
         return view;
     }
@@ -64,7 +67,12 @@ public class AlertsFragment extends Fragment {
         return new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                alerts.clear();
+                if (alerts.isEmpty()) {
+                    alertsProgressLinearLayout.setVisibility(View.GONE);
+                    alertsRecyclerView.setVisibility(View.VISIBLE);
+                } else {
+                    alerts.clear();
+                }
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Alert alert = snapshot.getValue(Alert.class);
