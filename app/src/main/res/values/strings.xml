@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Instant Service</string>
+    <string name="alerts_notif_channel">intent_service_alerts</string>
+    <string name="alerts_notif_channel_title">Alerts</string>
     <string name="web_client_id">225226042678-ji7hthifmrcra034k6vu3ocudr0rqk80.apps.googleusercontent.com</string>
     <string name="sign_in_with_google">Sign In with Google</string>
     <string name="sign_out">Sign Out</string>

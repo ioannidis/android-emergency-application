@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.papei.instantservice.R;
 
 import java.util.ArrayList;
@@ -33,21 +34,15 @@ public class AlertsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_alerts, container, false);
-
         this.dbRef = FirebaseDatabase.getInstance().getReference().child("alerts");
-
         this.alerts = new ArrayList<>();
-
         this.alertsRecyclerView = view.findViewById(R.id.alertsRecyclerView);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         this.alertsRecyclerView.setLayoutManager(manager);
         this.alertAdapter = new AlertAdapter(this.alerts);
         this.alertsRecyclerView.setAdapter(this.alertAdapter);
-
         this.alertListener = createAlertsListener();
-
         this.alertsProgressLinearLayout = view.findViewById(R.id.alertsProgressLinearLayout);
-
         return view;
     }
 

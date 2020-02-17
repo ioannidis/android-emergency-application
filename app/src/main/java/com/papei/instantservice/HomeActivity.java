@@ -25,7 +25,6 @@ public class HomeActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private ActionBar actionBar;
     private FirebaseUser user;
-    private boolean loadedHomeOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +37,7 @@ public class HomeActivity extends AppCompatActivity {
 
         this.fragmentManager = getSupportFragmentManager();
 
-        if (!this.loadedHomeOnce) {
-            navigateHomeFragment();
-            this.loadedHomeOnce = true;
-        }
+        navigateHomeFragment();
 
         BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
         nav.setSelectedItemId(R.id.homeMenuItem);

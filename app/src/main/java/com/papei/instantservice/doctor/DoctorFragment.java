@@ -40,26 +40,19 @@ public class DoctorFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doctor, container, false);
-
         this.dbRef = FirebaseDatabase.getInstance().getReference().child("messages");
-
         this.messageRecyclerView = view.findViewById(R.id.messagesRecyclerView);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setStackFromEnd(true);
         this.messageRecyclerView.setLayoutManager(manager);
         this.messageAdapter = new MessageAdapter(messages);
         this.messageRecyclerView.setAdapter(this.messageAdapter);
-
         this.valueEventListener = this.createMessageListener();
-
         this.user = FirebaseAuth.getInstance().getCurrentUser();
-
         this.messageEditText = view.findViewById(R.id.messageEditText);
         this.messageEditText.setOnEditorActionListener(createEditorActionListener());
-
         this.doctorProgressLinearLayout = view.findViewById(R.id.doctorProgressLinearLayout);
         this.messagesLinearLayout = view.findViewById(R.id.messagesLinearLayout);
-
         return view;
     }
 
