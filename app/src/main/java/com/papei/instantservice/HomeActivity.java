@@ -16,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.papei.instantservice.alerts.AlertsFragment;
 import com.papei.instantservice.doctor.DoctorFragment;
 import com.papei.instantservice.drive.MainActivity;
@@ -31,14 +32,12 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         this.firebaseAuth = FirebaseAuth.getInstance();
         this.user = firebaseAuth.getCurrentUser();
         this.actionBar = getSupportActionBar();
-
         this.fragmentManager = getSupportFragmentManager();
-
-        navigateHomeFragment();
+        this.subscribeToTopics();
+        this.navigateHomeFragment();
 
         BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
         nav.setSelectedItemId(R.id.homeMenuItem);
@@ -126,5 +125,11 @@ public class HomeActivity extends AppCompatActivity {
     public void panicActivity(View view) {
         Intent intent = new Intent(this, PanicActivity.class);
         this.startActivity(intent);
+    }
+
+    private void subscribeToTopics() {
+        FirebaseMessaging messaging = FirebaseMessaging.getInstance();
+
+        messaging.subscribeToTopic(getString(R.string.alerts_notif_topic));
     }
 }
