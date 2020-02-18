@@ -3,6 +3,7 @@ package com.papei.instantservice.panic;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
 import android.Manifest;
@@ -19,6 +20,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,15 +33,17 @@ import java.util.Objects;
 
 public class PanicActivity extends AppCompatActivity implements SensorEventListener {
 
-    private String txtMobile;
-    private String txtMessage;
-    private String emailAddress;
-    private Button btnSend, btnHospital, btnCall;
+    private String emergencyPhone;
+    private String message;
+    private String emergencyEmail ;
+    private Button btnMessages, btnHospital, btnCall;
     private SharedPreferences preferences;
     private String PREF_NAME = "emergency_phone";
     private String PREF_NAME2 = "emergency_email";
 
     private ActionBar actionBar;
+
+    private SharedPreferences sharedPreferences;
 
     private SensorManager sensorManager;
     private Sensor accelerometer;
@@ -61,67 +65,75 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
         // Enable back button on actionbar
         Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
 
-        emailAddress = preferences.getString(PREF_NAME2,"");
-        txtMobile = preferences.getString(PREF_NAME,"");
-        txtMessage = "I need help this is urgent !!";
-        btnSend = (Button) findViewById(R.id.sosButton);
-        btnHospital = (Button) findViewById(R.id.hospitalButton);
-        btnCall = (Button) findViewById(R.id.callButton);
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("Send email", "");
+        sharedPreferences = android.preference.PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        emergencyPhone = sharedPreferences.getString("emergency_phone", "");
+        emergencyEmail = sharedPreferences.getString("emergency_email", "");
 
+        message = "I need help, this is urgent!!!";
 
-                try {
-                    //SMS
-                    //SmsManager smgr = SmsManager.getDefault();
-                    //smgr.sendTextMessage(txtMobile.toString(),null,txtMessage.toString(),null,null);
-                    Toast.makeText(PanicActivity.this, "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
-                    try {
-                        //EMAIL
-                        Toast.makeText(PanicActivity.this, "Sending mail", Toast.LENGTH_SHORT).show();
-                        //TODO get the settings email and phone
-                        new Thread(new Runnable() {
+        btnMessages = findViewById(R.id.sosButton);
+        btnHospital = findViewById(R.id.hospitalButton);
+        btnCall = findViewById(R.id.callButton);
 
-                            public void run() {
+        btnMessages.setEnabled(false);
+        if (checkPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+            btnMessages.setEnabled(true);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS}, 1000);
+        }
 
-                                try {
+        // On click send messages
+        btnMessages.setOnClickListener(v -> {
+            Log.i("Panic Activity", "Send messages button was clicked");
 
-                                    GMailSender sender = new GMailSender(
+            try {
+                //SMS
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(emergencyPhone,null, message,null,null);
+                Toast.makeText(PanicActivity.this, "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
+//                try {
+//                    //EMAIL
+//                    Toast.makeText(PanicActivity.this, "Sending mail", Toast.LENGTH_SHORT).show();
+//                    //TODO get the settings email and phone
+//                    new Thread(new Runnable() {
+//
+//                        public void run() {
+//
+//                            try {
+//
+//                                GMailSender sender = new GMailSender(
+//
+//                                        "0eea83be8dea9c",
+//
+//                                        "e3f515fb185655");
+//
+//                                //sender.addAttachment(Environment.getExternalStorageDirectory().getPath()+"/image.jpg");
+//
+//                                sender.sendMail("Test mail", "This mail has been sent from android app along with attachment",
+//
+//                                        "d3b1eb2a33-27551b@inbox.mailtrap.io",
+//
+//                                        emergencyEmail );
+//
+//                            } catch (Exception e) {
+//
+//                                Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
+//
+//
+//
+//                            }
+//
+//                        }
+//
+//                    }).start();
+//                    Toast.makeText(PanicActivity.this, "Sent mail", Toast.LENGTH_SHORT).show();
+//                }
+//                catch (ActivityNotFoundException ex) {
+//                    Toast.makeText(PanicActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+//                }
 
-                                            "0eea83be8dea9c",
-
-                                            "e3f515fb185655");
-
-                                    //sender.addAttachment(Environment.getExternalStorageDirectory().getPath()+"/image.jpg");
-
-                                    sender.sendMail("Test mail", "This mail has been sent from android app along with attachment",
-
-                                            "d3b1eb2a33-27551b@inbox.mailtrap.io",
-
-                                            emailAddress);
-
-                                } catch (Exception e) {
-
-                                    Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
-
-
-
-                                }
-
-                            }
-
-                        }).start();
-                        Toast.makeText(PanicActivity.this, "Sent mail", Toast.LENGTH_SHORT).show();
-                    }
-                    catch (android.content.ActivityNotFoundException ex) {
-                        Toast.makeText(PanicActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (Exception e) {
-                    Toast.makeText(PanicActivity.this, "SMS Failed to Send, Please try again", Toast.LENGTH_SHORT).show();
-                }
+            } catch (Exception e) {
+                Toast.makeText(this, "SMS Failed to Send, Please try again", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -155,7 +167,7 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
             @Override
             public void onClick(View v) {
                 try {
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + txtMobile));
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + emergencyPhone));
                     if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         // TODO: Consider calling
                         //    Activity#requestPermissions
@@ -251,6 +263,11 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) { }
+
+    public int checkPermission(String permission) {
+        int check = ContextCompat.checkSelfPermission(this, permission);
+        return (check == PackageManager.PERMISSION_GRANTED) ? PackageManager.PERMISSION_GRANTED : PackageManager.PERMISSION_DENIED;
+    }
 
     // Add functionality to back button
     @Override
