@@ -1,5 +1,6 @@
 package com.papei.instantservice.panic;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -20,11 +21,16 @@ import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.papei.instantservice.R;
+import com.papei.instantservice.SettingsActivity;
+import com.papei.instantservice.drive.HelpActivity;
 
 import java.util.Objects;
 import java.util.Properties;
@@ -45,6 +51,7 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
     private String emergencyEmail ;
     private Button btnMessages, btnHospital, btnCall;
 
+    private Intent intent;
     private ActionBar actionBar;
 
     private SharedPreferences sharedPreferences;
@@ -250,6 +257,29 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
             }
 
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.drive_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // Check option selection from the menu and start the corresponding activity
+        switch (item.getItemId()) {
+            case R.id.settings:
+                intent = new Intent(this, SettingsActivity.class);
+                this.startActivity(intent);
+                return true;
+            case R.id.help:
+                intent = new Intent(this, HelpActivity.class);
+                this.startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
