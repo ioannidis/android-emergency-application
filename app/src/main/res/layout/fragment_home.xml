@@ -7,36 +7,32 @@
     tools:context=".HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Home fragment!" />
 
     <Button
         android:id="@+id/driving_mode_button"
         android:layout_width="173dp"
         android:layout_height="103dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="28dp"
         android:onClick="drivingModeActivity"
         android:text="@string/driving_mode_button"
         android:textColor="#000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/panic_button" />
 
     <Button
         android:id="@+id/panic_button"
         android:layout_width="355dp"
         android:layout_height="98dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="164dp"
         android:layout_marginEnd="28dp"
+        android:background="#E00707"
         android:onClick="drivingModeActivity"
         android:text="@string/panic_button"
         android:textColor="#fff"
-        android:background="#E00707"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,25 +40,12 @@
         android:id="@+id/disability_mode_button"
         android:layout_width="173dp"
         android:layout_height="103dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="28dp"
         android:onClick="panicActivity"
         android:text="@string/disability_mode_button"
         android:textColor="#000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/panic_button_2"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="432dp"
-        android:background="@drawable/panic"
-        android:onClick="panicActivity"
-
-        android:textColor="#000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/panic_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
