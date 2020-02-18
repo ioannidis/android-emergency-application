@@ -5,7 +5,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.preference.PreferenceManager;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -19,9 +21,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.papei.instantservice.R;
+import com.papei.instantservice.fall.FallDetection;
 
 public class PanicActivity extends AppCompatActivity {
 
+    private FallDetection fallDetection;
     private String txtMobile;
     private String txtMessage;
     private String emailAddress;
@@ -35,6 +39,8 @@ public class PanicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_panic);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        fallDetection = new FallDetection();
+        startService(new Intent(PanicActivity.this,FallDetection.class));
 
         emailAddress = preferences.getString(PREF_NAME2,"");
         txtMobile = preferences.getString(PREF_NAME,"");

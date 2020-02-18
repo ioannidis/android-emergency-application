@@ -69,6 +69,7 @@
         <activity
             android:name=".drive.MainActivity"
             android:label="@string/driving_mode_title" />
+        <service android:name = ".fall.FallDetection"/>
     </application>
 
 </manifest>
