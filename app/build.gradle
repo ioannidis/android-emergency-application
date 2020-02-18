@@ -43,8 +43,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'androidx.preference:preference:1.1.0'
     implementation 'androidx.biometric:biometric:1.0.1'
-    implementation files('/Users/Dennis/Downloads/additionnal.jar')
-    implementation files('/Users/Dennis/Downloads/activation.jar')
-    implementation files('/Users/Dennis/Downloads/mail.jar')
+    implementation group: 'com.sun.mail', name: 'android-activation', version: '1.6.4'
+    implementation group: 'com.sun.mail', name: 'android-mail', version: '1.6.4'
 
 }

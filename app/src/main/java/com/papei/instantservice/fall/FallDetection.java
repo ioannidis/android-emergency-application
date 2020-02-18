@@ -10,10 +10,16 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
+
+import androidx.fragment.app.DialogFragment;
 
 import com.papei.instantservice.R;
 import com.papei.instantservice.panic.PanicActivity;
+import com.papei.instantservice.util.MyDialog;
 
 
 public class FallDetection extends Service implements SensorEventListener {
@@ -65,23 +71,63 @@ public class FallDetection extends Service implements SensorEventListener {
                     mLastShakeTime = curTime;
                     Toast.makeText(getApplicationContext(), "FALL DETECTED",
                             Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "GIA TON POUTSO EPESE!", Toast.LENGTH_LONG).show();
+                    Log.d("mySensor", "GIA TON POUTSO EPESE!");
 
-                    new AlertDialog.Builder(this)
-                            .setTitle("Fall detected")
-                            .setMessage("Are you ok?")
+//                    DialogFragment a = MyDialog.newInstance(1);
+//                    a.show(getFragmentManager(), "dialog");
 
-                            // Specifying a listener allows you to take an action before dismissing the dialog.
-                            // The dialog is automatically dismissed when a dialog button is clicked.
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // Continue with delete operation
-                                }
-                            })
 
-                            // A null listener allows the button to dismiss the dialog and take no further action.
-                            .setNegativeButton(android.R.string.no, null)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                    builder.setTitle("Test dialog");
+                    builder.setMessage("Content");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            //Do something
+                            dialog.dismiss();
+                        }
+                            });
+
+                    builder.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int whichButton) {
+                                                    dialog.dismiss();
+                                                }
+                                            });
+                                            AlertDialog alert = builder.create();
+                    alert.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
+                    alert.show();
+
+
+//                    AlertDialog.Builder alert = new AlertDialog.Builder(this);
+//                    alert.setTitle("TIN PANAGIA MOY");
+//                    alert.setMessage("BARETHIKA");
+////                    alert.setPositiveButton("I NEED HELP", (dialogInterface, i) -> {
+////                        Toast.makeText(this,"10 GAMIMENA LEPTA PSAKSIMO STO INTERNET", Toast.LENGTH_LONG).show();
+////                    });
+////                    alert.setNegativeButton("OXI", (dialogInterface, i) -> {
+////                        Toast.makeText(this,"OXI GAMO TIN EYA", Toast.LENGTH_LONG).show();
+////                    });
+//                    alert.create().show();
+
+
+
+//                    new AlertDialog.Builder(this)
+//                            .setTitle("Fall detected")
+//                            .setMessage("Are you ok?")
+//
+//                            // Specifying a listener allows you to take an action before dismissing the dialog.
+//                            // The dialog is automatically dismissed when a dialog button is clicked.
+//                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    // Continue with delete operation
+//                                }
+//                            })
+//
+//                            // A null listener allows the button to dismiss the dialog and take no further action.
+//                            .setNegativeButton(android.R.string.no, null)
+//                            .setIcon(android.R.drawable.ic_dialog_alert)
+//                            .show();
 
                 }
             }

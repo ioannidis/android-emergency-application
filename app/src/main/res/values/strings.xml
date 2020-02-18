@@ -17,6 +17,17 @@
     <string name="alert_title">Title</string>
     <string name="alert_description">Description</string>
 
+    <string name="panic_button">Panic Button</string>
+
+    <!--  Disability package  -->
+    <string name="disability_mode_title">Disability mode</string>
+    <string name="disability_mode_button">Disability Mode</string>
+    <string name="SOS">SEND MESSAGE</string>
+    <string name="panic_mode_is_enabled">Panic Mode is enabled</string>
+    <string name="send_sos_message">Press button to send SOS email and SMS</string>
+    <string name="call_the_hospital">Call the hospital</string>
+    <string name="call_emergency_contact">Call emergency contact</string>
+
     <!-- Drive package -->
     <string name="driving_mode_title">Driving Mode</string>
     <string name="driving_mode_button">Driving Mode</string>
@@ -58,14 +69,13 @@
     <string name="tab_text_1">Main</string>
     <string name="tab_text_2">Violations</string>
     <string name="tab_text_3">Map</string>
+
+<!--  Fingerprint  -->
     <string name="sign_in_with_fingerprint">Use fingerprint</string>
     <string name="security">Be more secure</string>
     <string name="fingerprint">Please verify your fingerprint</string>
-    <string name="panic_button">Panic Button</string>
-    <string name="SOS">SEND MESSAGE</string>
-    <string name="panic_mode_is_enabled">Panic Mode is enabled</string>
-    <string name="send_sos_message">Press button to send SOS email and SMS</string>
-    <string name="call_the_hospital">Call the hospital</string>
-    <string name="call_emergency_contact">Call emergency contact</string>
+
+
+
 
 </resources>
