@@ -5,8 +5,12 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -40,5 +44,20 @@ public class SettingsActivity extends AppCompatActivity {
         onBackPressed();
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("deprecation")
+    private void setApplicationLanguage(String newLanguage) {
+        Resources activityRes = getResources();
+        Configuration activityConf = activityRes.getConfiguration();
+        Locale newLocale = new Locale(newLanguage);
+        activityConf.setLocale(newLocale);
+        activityRes.updateConfiguration(activityConf, activityRes.getDisplayMetrics());
+
+        Resources applicationRes = getApplicationContext().getResources();
+        Configuration applicationConf = applicationRes.getConfiguration();
+        applicationConf.setLocale(newLocale);
+        applicationRes.updateConfiguration(applicationConf,
+                applicationRes.getDisplayMetrics());
     }
 }

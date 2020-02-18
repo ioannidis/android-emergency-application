@@ -21,7 +21,7 @@
 
         <EditTextPreference
             app:key="language_value"
-            app:title="EDO THA MPEI DROPDOWN"
+            app:title="@string/language"
             android:inputType="number"
             android:digits="0123456789"
             android:maxLength="3"
