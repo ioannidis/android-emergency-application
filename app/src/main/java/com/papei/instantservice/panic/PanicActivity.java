@@ -19,22 +19,18 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.papei.instantservice.R;
-import com.papei.instantservice.fall.FallDetection;
+
 
 import java.util.Objects;
 
 public class PanicActivity extends AppCompatActivity implements SensorEventListener {
 
-    private FallDetection fallDetection;
     private String txtMobile;
     private String txtMessage;
     private String emailAddress;
