@@ -255,6 +255,7 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
 
                 }
             }
+
         }
     }
 

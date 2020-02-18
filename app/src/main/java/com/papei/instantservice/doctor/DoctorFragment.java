@@ -96,15 +96,12 @@ public class DoctorFragment extends Fragment {
     }
 
     private TextView.OnEditorActionListener createEditorActionListener() {
-        return new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_GO) {
-                    sendMessage();
-                    return true;
-                } else {
-                    return false;
-                }
+        return (v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_GO) {
+                sendMessage();
+                return true;
+            } else {
+                return false;
             }
         };
     }

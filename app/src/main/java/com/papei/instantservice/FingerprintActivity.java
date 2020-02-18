@@ -9,8 +9,13 @@ import androidx.biometric.*;
 import androidx.core.content.ContextCompat;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +25,7 @@ import android.widget.Toast;
 
 import android.os.Bundle;
 
+import java.util.Locale;
 import java.util.concurrent.Executor;
 
 public class FingerprintActivity extends AppCompatActivity {
@@ -35,6 +41,7 @@ public class FingerprintActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fingerprint);
 
         fingerprintSensor = false;
+
 
         //Check to see if device has fingerpint sensor
         BiometricManager biometricManager = BiometricManager.from(this);

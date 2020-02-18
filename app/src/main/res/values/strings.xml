@@ -14,7 +14,7 @@
     <string name="create_alert">Create a new alert</string>
     <string name="alerts_notif_channel">intent_service_alerts</string>
     <string name="alerts_notif_channel_title">Alerts</string>
-    <string name="alerts_notif_topic">alerts</string>
+    <string name="alerts_notif_topic" translatable="false">alerts</string>
     <string name="alert_title">Title</string>
     <string name="alert_description">Description</string>
 
@@ -70,12 +70,11 @@
     <string name="tab_text_2">Violations</string>
     <string name="tab_text_3">Map</string>
 
-<!--  Fingerprint  -->
+    <!--  Fingerprint  -->
     <string name="sign_in_with_fingerprint">Use fingerprint</string>
     <string name="security">Be more secure</string>
     <string name="fingerprint">Please verify your fingerprint</string>
-
-
+    <string name="language">Choose language</string>
 
 
 </resources>

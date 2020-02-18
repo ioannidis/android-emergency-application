@@ -8,8 +8,7 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -19,7 +18,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".alerts.CreateAlertActivity" />
+        <activity
+            android:name=".HomeHelpActivity"
+            android:label="@string/title_activity_help" />
+        <activity
+            android:name=".alerts.AlertsHelpActivity"
+            android:label="@string/title_activity_help" />
+        <activity
+            android:name=".doctor.DoctorHelpActivity"
+            android:label="@string/title_activity_help" />
+        <activity
+            android:name=".alerts.CreateAlertActivity"
+            android:label="@string/create_alert" />
 
         <service android:name=".alerts.AlertService">
             <intent-filter>
@@ -73,7 +83,6 @@
         <activity
             android:name=".panic.PanicActivity"
             android:label="@string/disability_mode_title" />
-<!--        <service android:name = ".fall.FallDetection"/>-->
     </application>
 
 </manifest>
