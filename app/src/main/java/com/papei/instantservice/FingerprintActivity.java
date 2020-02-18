@@ -55,7 +55,7 @@ public class FingerprintActivity extends AppCompatActivity {
                 break;
         }
         if (!fingerprintSensor){
-            //if not then go to home page
+            //if not then go to home
             startHomeActivity();
         }
         executor = ContextCompat.getMainExecutor(this);

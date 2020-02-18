@@ -5,7 +5,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".alerts.CreateAlertActivity"></activity>
+        <activity android:name=".panic.PanicActivity"></activity>
+        <activity android:name=".alerts.CreateAlertActivity" />
 
         <service android:name=".alerts.AlertService">
             <intent-filter>

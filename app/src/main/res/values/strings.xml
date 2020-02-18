@@ -61,5 +61,11 @@
     <string name="sign_in_with_fingerprint">Use fingerprint</string>
     <string name="security">Be more secure</string>
     <string name="fingerprint">Please verify your fingerprint</string>
+    <string name="panic_button">Panic Button</string>
+    <string name="SOS">SEND MESSAGE</string>
+    <string name="panic_mode_is_enabled">Panic Mode is enabled</string>
+    <string name="send_sos_message">Press button to send SOS email and SMS</string>
+    <string name="call_the_hospital">Call the hospital</string>
+    <string name="call_emergency_contact">Call emergency contact</string>
 
 </resources>

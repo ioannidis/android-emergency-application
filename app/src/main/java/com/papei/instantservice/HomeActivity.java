@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.papei.instantservice.alerts.AlertsFragment;
 import com.papei.instantservice.doctor.DoctorFragment;
 import com.papei.instantservice.drive.MainActivity;
+import com.papei.instantservice.panic.PanicActivity;
 
 public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
@@ -119,6 +120,11 @@ public class HomeActivity extends AppCompatActivity {
     // Open driving model activity
     public void drivingModeActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+        this.startActivity(intent);
+    }
+    // Open panic activity
+    public void panicActivity(View view) {
+        Intent intent = new Intent(this, PanicActivity.class);
         this.startActivity(intent);
     }
 }

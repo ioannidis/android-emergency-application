@@ -18,4 +18,6 @@ public class HomeFragment extends Fragment {
     // Placeholder
     public void drivingModeActivity(View view) {
     }
+    public void panicActivity(View view) {
+    }
 }
