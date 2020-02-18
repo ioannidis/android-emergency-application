@@ -2,10 +2,12 @@ package com.papei.instantservice.panic;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.preference.PreferenceManager;
 
 import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,13 +24,20 @@ public class PanicActivity extends AppCompatActivity {
 
     private String txtMobile;
     private String txtMessage;
+    private String emailAddress;
     private Button btnSend, btnHospital, btnCall;
+    private SharedPreferences preferences;
+    private String PREF_NAME = "emergency_phone";
+    private String PREF_NAME2 = "emergency_email";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_panic);
-        txtMobile = "Our phone number";
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        emailAddress = preferences.getString(PREF_NAME2,"");
+        txtMobile = preferences.getString(PREF_NAME,"");
         txtMessage = "I need help this is urgent !!";
         btnSend = (Button) findViewById(R.id.sosButton);
         btnHospital = (Button) findViewById(R.id.hospitalButton);
@@ -38,18 +47,7 @@ public class PanicActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.i("Send email", "");
 
-                //TODO get the settings email and phone
 
-                String[] TO = {"dionisisnikas@gmail.com"};
-                String[] CC = {""};
-                Intent emailIntent = new Intent(Intent.ACTION_SEND);
-
-                emailIntent.setData(Uri.parse("mailto:"));
-                emailIntent.setType("text/rfc822");
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-                emailIntent.putExtra(Intent.EXTRA_CC, CC);
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "URGENT HELP !!");
-                emailIntent.putExtra(Intent.EXTRA_TEXT, "Please help me i need help !!");
                 try {
                     //SMS
                     //SmsManager smgr = SmsManager.getDefault();
@@ -57,9 +55,42 @@ public class PanicActivity extends AppCompatActivity {
                     Toast.makeText(PanicActivity.this, "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
                     try {
                         //EMAIL
-                        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                        Log.i("Finished sending email...", "");
-                    } catch (android.content.ActivityNotFoundException ex) {
+                        Toast.makeText(PanicActivity.this, "Sending mail", Toast.LENGTH_SHORT).show();
+                        //TODO get the settings email and phone
+                        new Thread(new Runnable() {
+
+                            public void run() {
+
+                                try {
+
+                                    GMailSender sender = new GMailSender(
+
+                                            "0eea83be8dea9c",
+
+                                            "e3f515fb185655");
+
+                                    //sender.addAttachment(Environment.getExternalStorageDirectory().getPath()+"/image.jpg");
+
+                                    sender.sendMail("Test mail", "This mail has been sent from android app along with attachment",
+
+                                            "d3b1eb2a33-27551b@inbox.mailtrap.io",
+
+                                            emailAddress);
+
+                                } catch (Exception e) {
+
+                                    Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
+
+
+
+                                }
+
+                            }
+
+                        }).start();
+                        Toast.makeText(PanicActivity.this, "Sent mail", Toast.LENGTH_SHORT).show();
+                    }
+                    catch (android.content.ActivityNotFoundException ex) {
                         Toast.makeText(PanicActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
                     }
 
@@ -73,7 +104,7 @@ public class PanicActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "6942707407"));
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "166"));
                     if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         // TODO: Consider calling
                         //    Activity#requestPermissions
@@ -99,7 +130,7 @@ public class PanicActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "6942707407"));
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + txtMobile));
                     if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         // TODO: Consider calling
                         //    Activity#requestPermissions
