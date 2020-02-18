@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -26,9 +27,6 @@ import com.papei.instantservice.doctor.DoctorHelpActivity;
 import com.papei.instantservice.drive.MainActivity;
 import com.papei.instantservice.panic.PanicActivity;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
@@ -82,6 +80,7 @@ public class HomeActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.fragments_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -170,4 +169,5 @@ public class HomeActivity extends AppCompatActivity {
         emergencyPhone = sharedPreferences.getString("emergency_phone", "");
         emergencyEmail = sharedPreferences.getString("emergency_email", "");
     }
+
 }

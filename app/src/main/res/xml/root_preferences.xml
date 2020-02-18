@@ -19,15 +19,14 @@
 
     <PreferenceCategory app:title="@string/language_header">
 
-        <EditTextPreference
+        <DropDownPreference
             app:key="language_value"
             app:title="@string/language"
-            android:inputType="number"
-            android:digits="0123456789"
-            android:maxLength="3"
-            app:defaultValue="50"
-            app:dialogTitle="Enter the speed limit"
-            app:useSimpleSummaryProvider="true" />
+            android:defaultValue="@string/default_language"
+            android:entries="@array/languages"
+            android:entryValues="@array/languagesValues"
+            app:useSimpleSummaryProvider="true"
+             />
 
 
     </PreferenceCategory>

@@ -55,5 +55,6 @@
     <string name="google_maps_key">AIzaSyAb1scb4SrfL3kpwbyWbQ-XJq_oFhBuj8E</string>
     <string name="alerts_notif_channel">intent_service_alerts</string>
     <string name="language">Επιλέξτε γλώσσα</string>
+    <string name="default_language">Αγγλικά</string>
 
 </resources>
