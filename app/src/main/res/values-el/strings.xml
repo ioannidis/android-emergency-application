@@ -25,9 +25,8 @@
     <string name="metric">Χμ/Ωρα</string>
     <string name="more_button">περισσότερα</string>
     <string name="panic_button">Κουμπί εκτακτης ανάγκης</string>
-    <string name="panic_mode_is_enabled">Η λειτουργία έκτακτης ανάγκης είναι ενεργοποιμένη</string>
     <string name="please_sign_in">Παρακαλώ συνδεθείτε για να συνεχίσετε</string>
-    <string name="send_sos_message">Πατήστε το κουμπί για αποστολή ΣΟΣ email και μηνύματος</string>
+    <string name="send_sos_message">Είστε σε κατάσταση εκτάκτου ανάγκης; Ζητήστε αμέσως βοήθεια</string>
     <string name="settings">Ρυθμίσεις</string>
     <string name="sign_in_with_fingerprint">Χρησιμοποίηση δακτυλικού αποτυπώματος</string>
     <string name="sign_in_with_google">Σύνδεση με Google</string>
@@ -55,4 +54,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="google_maps_key">AIzaSyAb1scb4SrfL3kpwbyWbQ-XJq_oFhBuj8E</string>
     <string name="alerts_notif_channel">intent_service_alerts</string>
+    <string name="language">Επιλέξτε γλώσσα</string>
+
 </resources>
