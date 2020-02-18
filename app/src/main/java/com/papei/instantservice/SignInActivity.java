@@ -1,12 +1,16 @@
 package com.papei.instantservice;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -19,6 +23,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.Locale;
+import java.util.Objects;
+
 public class SignInActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "GoogleAuth";
@@ -27,9 +34,17 @@ public class SignInActivity extends AppCompatActivity {
     private GoogleSignInClient client;
     private FirebaseAuth auth;
 
+    private String pref;
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences = android.preference.PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        pref = sharedPreferences.getString("language_value","default");
+        setApplicationLanguage(pref);
         setContentView(R.layout.activity_sign_in);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -80,5 +95,18 @@ public class SignInActivity extends AppCompatActivity {
         Intent fingerprintIntent = new Intent(getApplicationContext(), FingerprintActivity.class);
         startActivity(fingerprintIntent);
         finish();
+    }
+    private void setApplicationLanguage(String newLanguage) {
+        Resources activityRes = getResources();
+        Configuration activityConf = activityRes.getConfiguration();
+        Locale newLocale = new Locale(newLanguage);
+        activityConf.setLocale(newLocale);
+        activityRes.updateConfiguration(activityConf, activityRes.getDisplayMetrics());
+
+        Resources applicationRes = getApplicationContext().getResources();
+        Configuration applicationConf = applicationRes.getConfiguration();
+        applicationConf.setLocale(newLocale);
+        applicationRes.updateConfiguration(applicationConf,
+                applicationRes.getDisplayMetrics());
     }
 }

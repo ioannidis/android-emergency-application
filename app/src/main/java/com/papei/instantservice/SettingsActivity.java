@@ -58,6 +58,13 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         Preference preference =
@@ -65,8 +72,8 @@ public class SettingsActivity extends AppCompatActivity {
         preference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                Toast.makeText(getApplicationContext(),preference.getSharedPreferences().getString(pref_key,""),Toast.LENGTH_SHORT).show();
-                setApplicationLanguage(preference.getSharedPreferences().getString(pref_key,"default"));
+
+                setApplicationLanguage(newValue.toString());
                 finish();
                 overridePendingTransition( 0, 0);
                 startActivity(getIntent());

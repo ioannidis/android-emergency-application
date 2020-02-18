@@ -10,7 +10,7 @@
     <Button
         android:id="@+id/signInBiometrics"
         android:layout_width="220dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:drawableStart="@drawable/fingerprint_dialog_fp_to_error"
         android:text="@string/sign_in_with_fingerprint"
         android:textSize="14sp"

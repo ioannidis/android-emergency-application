@@ -1,7 +1,6 @@
 package com.papei.instantservice;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.preference.PreferenceManager;
+import androidx.preference.Preference;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -27,15 +26,11 @@ import com.papei.instantservice.doctor.DoctorHelpActivity;
 import com.papei.instantservice.drive.MainActivity;
 import com.papei.instantservice.panic.PanicActivity;
 
-
 public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FragmentManager fragmentManager;
     private ActionBar actionBar;
     private FirebaseUser user;
-
-    private String emergencyPhone;
-    private String emergencyEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +42,6 @@ public class HomeActivity extends AppCompatActivity {
         this.fragmentManager = getSupportFragmentManager();
         this.subscribeToTopics();
         this.navigateHomeFragment();
-
-        getPreferences();
 
         BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
         nav.setSelectedItemId(R.id.homeMenuItem);
@@ -70,9 +63,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        getPreferences();
+    protected void onRestart() {
+        super.onRestart();
+        recreate();
     }
 
     @Override
@@ -164,10 +157,5 @@ public class HomeActivity extends AppCompatActivity {
         messaging.subscribeToTopic(getString(R.string.alerts_notif_topic));
     }
 
-    private void getPreferences() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        emergencyPhone = sharedPreferences.getString("emergency_phone", "");
-        emergencyEmail = sharedPreferences.getString("emergency_email", "");
-    }
 
 }

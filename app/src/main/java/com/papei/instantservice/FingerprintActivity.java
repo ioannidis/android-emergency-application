@@ -7,10 +7,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.biometric.*;
 import androidx.core.content.ContextCompat;
+import androidx.preference.Preference;
 
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
@@ -114,6 +116,8 @@ public class FingerprintActivity extends AppCompatActivity {
         startActivity(homeIntent);
         finish();
     }
+
+
 
     }
 
