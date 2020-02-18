@@ -47,6 +47,7 @@
         <activity android:name=".FingerprintActivity" />
         <activity android:name=".HomeActivity" />
         <activity
+            android:configChanges="locale"
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity android:name=".SignInActivity">
