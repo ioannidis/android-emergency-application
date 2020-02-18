@@ -39,7 +39,7 @@
         android:layout_width="220dp"
         android:layout_height="80dp"
         android:backgroundTint="@android:color/holo_green_light"
-        android:drawableStart="@drawable/common_full_open_on_phone"
+        android:drawableStart="@drawable/ic_local_phone_black_24dp"
         android:text="@string/call_emergency_contact"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,30 +49,14 @@
         app:layout_constraintVertical_bias="0.06999999" />
 
     <TextView
-        android:id="@+id/panicTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/panic_mode_is_enabled"
-        android:textColor="#333333"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.22" />
-
-    <TextView
         android:id="@+id/panicNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="345dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="200dp"
         android:text="@string/send_sos_message"
         android:textAlignment="center"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/panicTitleTextView"
-        app:layout_constraintVertical_bias="0.01999998" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="29dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
