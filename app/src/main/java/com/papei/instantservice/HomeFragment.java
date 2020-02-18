@@ -42,8 +42,7 @@ public class HomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        emergencyPhone = sharedPreferences.getString("emergency_phone", "");
-        emergencyEmail = sharedPreferences.getString("emergency_email", "");
+        getPreferences();
 
         message = "I need help, this is urgent!!!";
 
@@ -51,8 +50,8 @@ public class HomeFragment extends Fragment {
         panicButton.setOnClickListener((View v) -> {
 
             try {
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(emergencyPhone,null, message,null,null);
+//                SmsManager smsManager = SmsManager.getDefault();
+//                smsManager.sendTextMessage(emergencyPhone,null, message,null,null);
                 Toast.makeText(getContext(), "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 Toast.makeText(getContext(), "SMS Failed to Send, Please try again", Toast.LENGTH_SHORT).show();
@@ -72,10 +71,21 @@ public class HomeFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getPreferences();
+    }
+
     // Check permission
     public int checkPermission(String permission) {
         int check = ContextCompat.checkSelfPermission(getContext(), permission);
         return (check == PackageManager.PERMISSION_GRANTED) ? PackageManager.PERMISSION_GRANTED : PackageManager.PERMISSION_DENIED;
+    }
+
+    private void getPreferences() {
+        emergencyPhone = sharedPreferences.getString("emergency_phone", "");
+        emergencyEmail = sharedPreferences.getString("emergency_email", "");
     }
 
     // Placeholder

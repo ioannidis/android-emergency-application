@@ -10,7 +10,6 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -20,7 +19,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,20 +26,17 @@ import android.widget.Toast;
 
 import com.papei.instantservice.R;
 
-
 import java.util.Objects;
 import java.util.Properties;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+
 
 public class PanicActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -49,9 +44,6 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
     private String message;
     private String emergencyEmail ;
     private Button btnMessages, btnHospital, btnCall;
-    private SharedPreferences preferences;
-    private String PREF_NAME = "emergency_phone";
-    private String PREF_NAME2 = "emergency_email";
 
     private ActionBar actionBar;
 
@@ -70,16 +62,13 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_panic);
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         actionBar = getSupportActionBar();
 
         // Enable back button on actionbar
         Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
 
-        sharedPreferences = android.preference.PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        emergencyPhone = sharedPreferences.getString("emergency_phone", "");
-        emergencyEmail = sharedPreferences.getString("emergency_email", "");
+        getPreferences();
 
         message = "I need help, this is urgent!!!";
 
@@ -137,14 +126,12 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
 
                         Transport.send(message);
 
-                        Toast.makeText(PanicActivity.this, "Email Sent Successfully", Toast.LENGTH_SHORT).show();
-
                     } catch (MessagingException e) {
                         throw new RuntimeException(e);
                     }
 
                 }).start();
-                Toast.makeText(PanicActivity.this, "Sent mail", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PanicActivity.this, "Email Sent Successfully", Toast.LENGTH_SHORT).show();
             }
             catch (ActivityNotFoundException ex) {
                 Toast.makeText(PanicActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
@@ -192,6 +179,12 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getPreferences();
     }
 
     @Override
@@ -273,5 +266,11 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    private void getPreferences() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        emergencyPhone = sharedPreferences.getString("emergency_phone", "");
+        emergencyEmail = sharedPreferences.getString("emergency_email", "");
     }
 }
