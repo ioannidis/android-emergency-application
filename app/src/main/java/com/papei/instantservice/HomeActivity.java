@@ -18,7 +18,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.papei.instantservice.alerts.AlertsFragment;
+import com.papei.instantservice.alerts.AlertsHelpActivity;
 import com.papei.instantservice.doctor.DoctorFragment;
+import com.papei.instantservice.doctor.DoctorHelpActivity;
 import com.papei.instantservice.drive.MainActivity;
 import com.papei.instantservice.panic.PanicActivity;
 
@@ -60,14 +62,26 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_settings, menu);
-        getMenuInflater().inflate(R.menu.menu_sign_out, menu);
+        getMenuInflater().inflate(R.menu.fragments_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.settingsMenuItem) {
+        if (item.getItemId() == R.id.helpMenuItem) {
+            CharSequence title = getSupportActionBar().getTitle();
+
+            if (title.equals(getString(R.string.home))) {
+                Intent settingsIntent = new Intent(this, HomeHelpActivity.class);
+                startActivity(settingsIntent);
+            } else if (title.equals(getString(R.string.doctor))) {
+                Intent settingsIntent = new Intent(this, DoctorHelpActivity.class);
+                startActivity(settingsIntent);
+            } else if (title.equals(getString(R.string.alerts))) {
+                Intent settingsIntent = new Intent(this, AlertsHelpActivity.class);
+                startActivity(settingsIntent);
+            }
+        } else if (item.getItemId() == R.id.settingsMenuItem) {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingsIntent);
         } else if (item.getItemId() == R.id.signOutMenuItem) {
@@ -121,6 +135,7 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         this.startActivity(intent);
     }
+
     // Open panic activity
     public void panicActivity(View view) {
         Intent intent = new Intent(this, PanicActivity.class);

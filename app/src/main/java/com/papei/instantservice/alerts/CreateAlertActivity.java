@@ -22,7 +22,6 @@ public class CreateAlertActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(R.string.create_alert);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDefaultDisplayHomeAsUpEnabled(true);
         }
