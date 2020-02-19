@@ -29,7 +29,7 @@
             android:label="@string/title_activity_help" />
         <activity
             android:name=".alerts.CreateAlertActivity"
-            android:label="@string/create_alert" />
+            android:label="Create Alert" />
 
         <service android:name=".alerts.AlertService">
             <intent-filter>

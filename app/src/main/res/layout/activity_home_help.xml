@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:lineHeight="24dp"
-                    android:text="Home"
+                    android:text="@string/home_help_label"
                     android:textColor="#333333"
                     android:textSize="18sp" />
 
@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:lineHeight="24dp"
-                    android:text="The home activity allows your to access driving mode, disability mode and the panic button."
+                    android:text="@string/home_help"
                     android:textColor="#555555"
                     android:textSize="14sp" />
 
@@ -45,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lineHeight="24dp"
-                    android:text="The two modes are able to assist you with every day tasks and provide medical care in case of an emergency."
+                    android:text="@string/home_help_2"
                     android:textColor="#555555"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:lineHeight="24dp"
-                    android:text="Driving Mode"
+                    android:text="@string/driving_mode_help_label"
                     android:textColor="#333333"
                     android:textSize="18sp" />
 
@@ -77,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:lineHeight="24dp"
-                    android:text="Whenever you are driving, you can enable this mode to control your driving speed."
+                    android:text="@string/driving_mode_help"
                     android:textColor="#555555"
                     android:textSize="14sp" />
 
@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lineHeight="24dp"
-                    android:text="In case of a speeding violation, you can check out the map overview for detailed markers."
+                    android:text="@string/driving_mode_help_2"
                     android:textColor="#555555"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:lineHeight="24dp"
-                    android:text="Disability Mode"
+                    android:text="@string/disability_mode_help_label"
                     android:textColor="#333333"
                     android:textSize="18sp" />
 
@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:lineHeight="24dp"
-                    android:text="If you frequently lose your balance when walking, you can enable this mode to increase safety."
+                    android:text="@string/disability_mode_help"
                     android:textColor="#555555"
                     android:textSize="14sp" />
 
@@ -125,7 +125,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lineHeight="24dp"
-                    android:text="In case of a sudden acceleration spike, which can be caused by a fall, we can call for assistance for you."
+                    android:text="@string/disability_mode_help_2"
                     android:textColor="#555555"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -148,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:lineHeight="24dp"
-                    android:text="Panic Button"
+                    android:text="@string/panic_button_help_label"
                     android:textColor="#333333"
                     android:textSize="18sp" />
 
@@ -156,7 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lineHeight="24dp"
-                    android:text="When something's not right, you can press the panic button to make rapid calls, texts or get in touch with a hospital."
+                    android:text="@string/panic_button_help"
                     android:textColor="#555555"
                     android:textSize="14sp" />
             </LinearLayout>

@@ -11,7 +11,6 @@
     <string name="doctor">Doctor</string>
     <string name="alerts">Alerts</string>
     <string name="type_your_message">Type your message…</string>
-    <string name="create_alert">Create a new alert</string>
     <string name="alerts_notif_channel">intent_service_alerts</string>
     <string name="alerts_notif_channel_title">Alerts</string>
     <string name="alerts_notif_topic" translatable="false">alerts</string>
@@ -76,6 +75,41 @@
     <string name="fingerprint">Please verify your fingerprint</string>
     <string name="language">Choose language</string>
     <string name="default_language">Languages</string>
+    <string name="alerts_help_label">Alerts</string>
+    <string name="alerts_help">Anytime there is an emergency we will inform you with alert notifications. When you receive an alert, you are encouraged to follow the instructions included to stay safe.</string>
+    <string name="doctor_help_label">Doctor</string>
+    <string name="doctor_help">Anytime you seek medical advice from a licensed doctor, this chat room will come in use. You can type messages anytime on any matter, to describe the problem you have.</string>
+    <string name="sending_messages_label">Sending messages</string>
+    <string name="sending_messages_help">To send a message, click on the input field near the bottom of the activity. Then, carefully type your message and press the enter key on your keyboard to send it.</string>
+    <string name="sending_messages_help_2">Your messages are always shown on the right hand side of the screen and bare your name on top of the message bubble.</string>
+    <string name="receiving_messages_help_label">Receiving messages</string>
+    <string name="receiving_messages_help">When a licensed doctor replies, your will see their messages on the left hand side of the screen and bare their name. Please comply with instructors and ask for clarification if nessesary.</string>
+    <string name="home_help_label">Home</string>
+    <string name="home_help">The home activity allows your to access driving mode, disability mode and the panic button.</string>
+    <string name="home_help_2">The two modes are able to assist you with every day tasks and provide medical care in case of an emergency.</string>
+    <string name="driving_mode_help_label">Driving Mode</string>
+    <string name="driving_mode_help">Whenever you are driving, you can enable this mode to control your driving speed.</string>
+    <string name="driving_mode_help_2">In case of a speeding violation, you can check out the map overview for detailed markers.</string>
+    <string name="disability_mode_help_label">Disability Mode</string>
+    <string name="disability_mode_help">If you frequently lose your balance when walking, you can enable this mode to increase safety.</string>
+    <string name="disability_mode_help_2">In case of a sudden acceleration spike, which can be caused by a fall, we can call for assistance for you.</string>
+    <string name="panic_button_help_label">Panic Button</string>
+    <string name="panic_button_help">When something\'s not right, you can press the panic button to make rapid calls, texts or get in touch with a hospital.</string>
+    <string name="enable_speed_capture_help_label">Enable speed capture</string>
+    <string name="enable_speed_capture_help">Click enable button to start speed capture.</string>
+    <string name="disable_speed_capture_help_label">Disable speed capture</string>
+    <string name="disable_speed_capture_help">Click disable button to stop speed capture</string>
+    <string name="display_all_violations_help_label">Display all violations</string>
+    <string name="display_all_violations_help">Click violations button to display all violations. You ca filter the violations by clicking the filter floating button! You can filter by custom date or you can display the violations of the past week!</string>
+    <string name="display_single_violation_help_label">Display single violation</string>
+    <string name="display_single_violation_help">Click the \'more\' button of a violation to display its details.</string>
+    <string name="map_help_label">Display map with every violation</string>
+    <string name="map_help">You can navigate through the map and see every place where a violation has been committed.</string>
+    <string name="settings_help_label">Settings</string>
+    <string name="settings_help">Click the dots on the top right corner to edit the application settings.  You can configure the speed limit! (Default 50 kmh)</string>
+    <string name="speech_recognition_help_label">Speech Recognition</string>
+    <string name="speech_recognition_help">On the main screen, click the floating button with the microphone to enable speech recognition! You must start your command saying \'speed\' or \'speedometer\' and then one of the following words:</string>
+    <string name="speech_recognition_help_2">1. \'start\' to enable the speed capture. 2. \'stop\' to disable screen capture. 3. \'violations\' to go to violations list. 4. \'map\' to go to map.</string>
 
     <string-array name="languages">
         <item>English</item>
