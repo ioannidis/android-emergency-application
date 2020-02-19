@@ -22,4 +22,4 @@ exports.sendAlertNotification = functions.database.ref('/alerts/{alertId}')
             .catch(error => {
                 console.log('Error:', error);
             })
-    })
+    });

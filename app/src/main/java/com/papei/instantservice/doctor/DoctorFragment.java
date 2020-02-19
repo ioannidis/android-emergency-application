@@ -28,11 +28,11 @@ import com.papei.instantservice.R;
 import java.util.ArrayList;
 
 public class DoctorFragment extends Fragment {
+    private FirebaseUser user;
     private ArrayList<Message> messages = new ArrayList<>();
     private DatabaseReference dbRef;
     private RecyclerView messageRecyclerView;
     private MessageAdapter messageAdapter;
-    private FirebaseUser user;
     private EditText messageEditText;
     private ValueEventListener valueEventListener;
     private LinearLayout doctorProgressLinearLayout, messagesLinearLayout;
@@ -40,7 +40,8 @@ public class DoctorFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doctor, container, false);
-        this.dbRef = FirebaseDatabase.getInstance().getReference().child("messages");
+        this.user = FirebaseAuth.getInstance().getCurrentUser();
+        this.dbRef = FirebaseDatabase.getInstance().getReference().child("users/" + user.getUid() + "/messages");
         this.messageRecyclerView = view.findViewById(R.id.messagesRecyclerView);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setStackFromEnd(true);
@@ -48,7 +49,6 @@ public class DoctorFragment extends Fragment {
         this.messageAdapter = new MessageAdapter(messages);
         this.messageRecyclerView.setAdapter(this.messageAdapter);
         this.valueEventListener = this.createMessageListener();
-        this.user = FirebaseAuth.getInstance().getCurrentUser();
         this.messageEditText = view.findViewById(R.id.messageEditText);
         this.messageEditText.setOnEditorActionListener(createEditorActionListener());
         this.doctorProgressLinearLayout = view.findViewById(R.id.doctorProgressLinearLayout);

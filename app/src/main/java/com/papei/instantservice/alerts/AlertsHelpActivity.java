@@ -20,4 +20,10 @@ public class AlertsHelpActivity extends AppCompatActivity {
             actionBar.setDefaultDisplayHomeAsUpEnabled(true);
         }
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

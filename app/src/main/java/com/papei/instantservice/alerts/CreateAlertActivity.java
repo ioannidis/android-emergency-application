@@ -14,6 +14,7 @@ import com.papei.instantservice.R;
 
 public class CreateAlertActivity extends AppCompatActivity {
     private DatabaseReference dbRef;
+    private EditText alertTitleInput, alertDescriptionInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,21 +28,30 @@ public class CreateAlertActivity extends AppCompatActivity {
         }
 
         this.dbRef = FirebaseDatabase.getInstance().getReference().child("alerts");
-        EditText alertTitleInput = findViewById(R.id.alertTitleInput);
-        EditText alertDescriptionInput = findViewById(R.id.alertDescriptionInput);
+        this.alertTitleInput = findViewById(R.id.alertTitleInput);
+        this.alertDescriptionInput = findViewById(R.id.alertDescriptionInput);
         FloatingActionButton button = findViewById(R.id.createAlertButton);
+        button.setOnClickListener(this.createClickListener());
+    }
 
-        button.setOnClickListener(v -> {
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
-            String title = alertTitleInput.getText().toString();
-            String description = alertDescriptionInput.getText().toString();
+    private View.OnClickListener createClickListener() {
+        return v -> {
+
+            String title = this.alertTitleInput.getText().toString();
+            String description = this.alertDescriptionInput.getText().toString();
 
             if (title.isEmpty() || description.isEmpty()) {
                 return;
             }
 
-            dbRef.push().setValue(new Alert(title, description));
+            this.dbRef.push().setValue(new Alert(title, description));
             finish();
-        });
+        };
     }
 }

@@ -20,4 +20,10 @@ public class DoctorHelpActivity extends AppCompatActivity {
             actionBar.setDefaultDisplayHomeAsUpEnabled(true);
         }
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

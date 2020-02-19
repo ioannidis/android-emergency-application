@@ -1,11 +1,9 @@
 package com.papei.instantservice;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-import java.util.Objects;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeHelpActivity extends AppCompatActivity {
 
@@ -13,8 +11,6 @@ public class HomeHelpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_help);
-        setTitle(R.string.title_activity_help);
-
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

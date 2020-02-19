@@ -6,13 +6,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -29,11 +27,12 @@ import com.papei.instantservice.drive.MainActivity;
 import com.papei.instantservice.panic.PanicActivity;
 
 public class HomeActivity extends AppCompatActivity {
+    private static String lastFragmentName;
     private FirebaseAuth firebaseAuth;
     private FragmentManager fragmentManager;
     private ActionBar actionBar;
     private FirebaseUser user;
-
+    private BottomNavigationView bottomNavigationView;
     private String emergencyPhone;
     private String emergencyEmail;
 
@@ -46,48 +45,31 @@ public class HomeActivity extends AppCompatActivity {
         this.actionBar = getSupportActionBar();
         this.fragmentManager = getSupportFragmentManager();
         this.subscribeToTopics();
-        this.navigateHomeFragment();
-
-        getPreferences();
-
-        BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
-        nav.setSelectedItemId(R.id.homeMenuItem);
-
-        nav.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.homeMenuItem:
-                    navigateHomeFragment();
-                    return true;
-                case R.id.doctorMenuItem:
-                    navigateDoctorFragment();
-                    return true;
-                case R.id.alertsMenuItem:
-                    navigateAlertsFragment();
-                    return true;
-            }
-            return false;
-        });
+        this.getPreferences();
+        this.bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        this.bottomNavigationView.setOnNavigationItemSelectedListener(this.createSelectionListener());
+        this.navigateToLastFragment();
     }
 
     private void getPreferences() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        emergencyPhone = sharedPreferences.getString("emergency_phone","");
-        emergencyEmail = sharedPreferences.getString("emergency_email","");
+        emergencyPhone = sharedPreferences.getString("emergency_phone", "");
+        emergencyEmail = sharedPreferences.getString("emergency_email", "");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
         finish();
-        overridePendingTransition( 0, 0);
+        overridePendingTransition(0, 0);
         startActivity(getIntent());
-        overridePendingTransition( 0, 0);
+        overridePendingTransition(0, 0);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getPreferences();
+        this.getPreferences();
     }
 
     @Override
@@ -95,7 +77,6 @@ public class HomeActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.fragments_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -126,34 +107,55 @@ public class HomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void navigateHomeFragment() {
-        this.fragmentManager.beginTransaction()
-                .replace(R.id.mainFrameLayout, new HomeFragment())
-                .addToBackStack(null)
-                .commit();
+    private BottomNavigationView.OnNavigationItemSelectedListener createSelectionListener() {
+        return item -> {
+            switch (item.getItemId()) {
+                case R.id.homeMenuItem:
+                    navigateHomeFragment();
+                    return true;
+                case R.id.doctorMenuItem:
+                    navigateDoctorFragment();
+                    return true;
+                case R.id.alertsMenuItem:
+                    navigateAlertsFragment();
+                    return true;
+            }
+            return false;
+        };
+    }
 
+    private void navigateToLastFragment() {
+        if (lastFragmentName == null || lastFragmentName.equals(getString(R.string.home))) {
+            this.bottomNavigationView.setSelectedItemId(R.id.homeMenuItem);
+        } else if (lastFragmentName.equals(getString(R.string.doctor))) {
+            this.bottomNavigationView.setSelectedItemId(R.id.doctorMenuItem);
+        } else if (lastFragmentName.equals(getString(R.string.alerts))) {
+            this.bottomNavigationView.setSelectedItemId(R.id.alertsMenuItem);
+        }
+    }
+
+    private void navigateHomeFragment() {
+        HomeFragment fragment = new HomeFragment();
+        this.fragmentManager.beginTransaction().replace(R.id.mainFrameLayout, fragment).commit();
         this.actionBar.setTitle(R.string.home);
         this.actionBar.setSubtitle(this.user.getDisplayName());
+        lastFragmentName = getString(R.string.home);
     }
 
     private void navigateDoctorFragment() {
-        this.fragmentManager.beginTransaction()
-                .replace(R.id.mainFrameLayout, new DoctorFragment())
-                .addToBackStack(null)
-                .commit();
-
+        DoctorFragment fragment = new DoctorFragment();
+        this.fragmentManager.beginTransaction().replace(R.id.mainFrameLayout, fragment).commit();
         this.actionBar.setTitle(R.string.doctor);
         this.actionBar.setSubtitle(null);
+        lastFragmentName = getString(R.string.doctor);
     }
 
     private void navigateAlertsFragment() {
-        this.fragmentManager.beginTransaction()
-                .replace(R.id.mainFrameLayout, new AlertsFragment())
-                .addToBackStack(null)
-                .commit();
-
+        AlertsFragment fragment = new AlertsFragment();
+        this.fragmentManager.beginTransaction().replace(R.id.mainFrameLayout, fragment).commit();
         this.actionBar.setTitle(R.string.alerts);
         this.actionBar.setSubtitle(null);
+        lastFragmentName = getString(R.string.alerts);
     }
 
     private void signOut() {
@@ -178,6 +180,4 @@ public class HomeActivity extends AppCompatActivity {
 
         messaging.subscribeToTopic(getString(R.string.alerts_notif_topic));
     }
-
-
 }

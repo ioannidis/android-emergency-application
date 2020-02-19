@@ -1,19 +1,15 @@
 package com.papei.instantservice;
 
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-
-import android.app.Application;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -22,11 +18,12 @@ public class SettingsActivity extends AppCompatActivity {
     private SettingsFragment settingsFragment;
     private Preference preference;
     private String pref_key;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        settingsFragment= new SettingsFragment();
+        settingsFragment = new SettingsFragment();
         setContentView(R.layout.settings_activity);
         getSupportFragmentManager()
                 .beginTransaction()
@@ -75,15 +72,16 @@ public class SettingsActivity extends AppCompatActivity {
 
                 setApplicationLanguage(newValue.toString());
                 finish();
-                overridePendingTransition( 0, 0);
+                overridePendingTransition(0, 0);
                 startActivity(getIntent());
-                overridePendingTransition( 0, 0);
+                overridePendingTransition(0, 0);
 
                 return true;
             }
         });
 
     }
+
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         // refresh your views here
