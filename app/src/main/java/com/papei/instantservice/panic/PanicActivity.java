@@ -20,6 +20,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,10 +31,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.papei.instantservice.R;
 import com.papei.instantservice.SettingsActivity;
 import com.papei.instantservice.drive.HelpActivity;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -44,12 +50,14 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 
-public class PanicActivity extends AppCompatActivity implements SensorEventListener {
+public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnInitListener, SensorEventListener {
 
     private String emergencyPhone;
     private String message;
     private String emergencyEmail ;
-    private Button btnMessages, btnHospital, btnCall;
+    private Button messagesButton, hospitalButton, callButton;
+    private FloatingActionButton speechRecognitionButton;
+
 
     private Intent intent;
     private ActionBar actionBar;
@@ -58,6 +66,9 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
 
     private SensorManager sensorManager;
     private Sensor accelerometer;
+
+    private TextToSpeech textToSpeech;
+    private SpeechRecognizer speechRecognizer;
 
     private static final float SHAKE_THRESHOLD = 15.00f; // m/S**2
     private static final int MIN_TIME_BETWEEN_SHAKES_MILLISECS = 1000;
@@ -77,9 +88,11 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
 
         message = "I need help, this is urgent!!!";
 
-        btnMessages = findViewById(R.id.sosButton);
-        btnHospital = findViewById(R.id.hospitalButton);
-        btnCall = findViewById(R.id.callButton);
+        messagesButton = findViewById(R.id.sosButton);
+        hospitalButton = findViewById(R.id.hospitalButton);
+        callButton = findViewById(R.id.callButton);
+        speechRecognitionButton = findViewById(R.id.speech_recognition_fab_panic);
+
 
         if (checkPermission(Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS}, 1001);
@@ -89,14 +102,20 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CALL_PHONE}, 1002);
         }
 
+        // Initialize speech recognition
+        initializeSpeechRecognition();
+
+        // Initialize text to speech
+        textToSpeech = new TextToSpeech(this, this);
+
         // On click send messages
-        btnMessages.setOnClickListener(v -> {
+        messagesButton.setOnClickListener(v -> {
             Log.i("Panic Activity", "Send messages button was clicked");
 
             sendMessages();
         });
 
-        btnHospital.setOnClickListener(new View.OnClickListener() {
+        hospitalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -113,7 +132,7 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
         });
 
 
-        btnCall.setOnClickListener(new View.OnClickListener() {
+        callButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -125,6 +144,17 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
                 } catch (ActivityNotFoundException activityException) {
                     Log.e("Calling a Phone Number", "Call failed", activityException);
                 }
+            }
+        });
+
+        // FAB listener
+        speechRecognitionButton.setOnClickListener((View view) -> {
+            if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, 2000);
+            } else {
+                Toast.makeText(this, "Please speak now!", Toast.LENGTH_LONG).show();
+                startActivityForResult(intent,2000);
+
             }
         });
 
@@ -146,6 +176,10 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (textToSpeech != null){
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
         sensorManager.unregisterListener(this);
     }
 
@@ -154,7 +188,8 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
         switch (requestCode) {
 
             case 1001:
-            case 1002: {
+            case 1002:
+            case 2000:{
 
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(getApplicationContext(), "Permission granted", Toast.LENGTH_SHORT).show();
@@ -164,6 +199,34 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
 
             }
 
+        }
+    }
+
+    // Initialize speech recognition intent
+    private void initializeSpeechRecognition() {
+        if (SpeechRecognizer.isRecognitionAvailable(this)) {
+            speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+            intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);
+            intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,
+                    this.getPackageName());
+        }
+    }
+
+    // Process the command gathered from microphone
+    private void processSpeechResult(String command) {
+        command = command.toLowerCase();
+
+        if (command.contains("send message") || command.contains("send a message") || command.contains("send messages")) {
+            messagesButton.performClick();
+        }else if (command.contains("call hospital")) {
+            hospitalButton.performClick();
+        }else if (command.contains("call contact")) {
+            callButton.performClick();
+        } else {
+            Toast.makeText(this, "The available commands are 'send message', 'call hospital', 'call contact'", Toast.LENGTH_LONG).show();
+            textToSpeech.speak("The available commands are 'send message', 'call hospital', 'call contact'", TextToSpeech.QUEUE_ADD, null, null);
         }
     }
 
@@ -252,6 +315,21 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
         emergencyEmail = sharedPreferences.getString("emergency_email", "");
     }
 
+    // Check activity results for speech recognition request code and then call the speech result
+    // call processSpeechResult to process the results
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 2000 && resultCode == RESULT_OK) {
+            List<String> results = data.getStringArrayListExtra(
+                    RecognizerIntent.EXTRA_RESULTS
+            );
+            System.out.println(results);
+            processSpeechResult(results.get(0));
+        }
+    }
+
     private void sendMessages() {
         // SMS
         try {
@@ -300,6 +378,20 @@ public class PanicActivity extends AppCompatActivity implements SensorEventListe
         }
         catch (ActivityNotFoundException ex) {
             Toast.makeText(PanicActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onInit(int status) {
+        // Setup speech to text
+        if(status == TextToSpeech.SUCCESS){
+            int result = textToSpeech.setLanguage(Locale.ENGLISH);
+            if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("DEBUG" , "Language Not Supported");
+            }
+        }
+        else{
+            Log.i("DEBUG" , "MISSION FAILED");
         }
     }
 }

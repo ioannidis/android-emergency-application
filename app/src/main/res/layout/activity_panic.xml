@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".panic.PanicActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/speech_recognition_fab_panic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_mic_black_24dp" />
+
     <Button
         android:id="@+id/sosButton"
         android:layout_width="220dp"
