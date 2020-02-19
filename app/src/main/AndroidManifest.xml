@@ -21,13 +21,16 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".HomeHelpActivity"
-            android:label="@string/title_activity_help" />
+            android:label="@string/title_activity_help"
+            android:configChanges="locale"/>
         <activity
             android:name=".alerts.AlertsHelpActivity"
-            android:label="@string/title_activity_help" />
+            android:label="@string/title_activity_help"
+            android:configChanges="locale"/>
         <activity
             android:name=".doctor.DoctorHelpActivity"
-            android:label="@string/title_activity_help" />
+            android:label="@string/title_activity_help"
+            android:configChanges="locale"/>
         <activity
             android:name=".alerts.CreateAlertActivity"
             android:label="Create Alert" />
@@ -45,22 +48,29 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <activity android:name=".FingerprintActivity" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".FingerprintActivity"
+            android:configChanges="locale"/>
+        <activity android:name=".HomeActivity"
+            android:configChanges="locale"/>
         <activity
             android:configChanges="locale"
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity android:name=".SignInActivity">
+            android:label="@string/title_activity_settings"
+            />
+        <activity android:name=".SignInActivity"
+            android:configChanges="locale">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".drive.HelpActivity" />
-        <activity android:name=".drive.AboutActivity" />
-        <activity android:name=".drive.ViolationDetailsActivity" />
+        <activity android:name=".drive.HelpActivity"
+            android:configChanges="locale"/>
+        <activity android:name=".drive.AboutActivity"
+            android:configChanges="locale"/>
+        <activity android:name=".drive.ViolationDetailsActivity"
+            android:configChanges="locale"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -75,16 +85,20 @@
 
         <activity
             android:name=".drive.MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:configChanges="locale"/>
         <activity
             android:name=".drive.ViolationsActivity"
-            android:label="@string/title_activity_violations" />
+            android:label="@string/title_activity_violations"
+            android:configChanges="locale"/>
         <activity
             android:name=".drive.MainActivity"
-            android:label="@string/driving_mode_title" />
+            android:label="@string/driving_mode_title"
+            android:configChanges="locale"/>
         <activity
             android:name=".panic.PanicActivity"
-            android:label="@string/disability_mode_title" />
+            android:label="@string/disability_mode_title"
+            android:configChanges="locale"/>
     </application>
 
 </manifest>
