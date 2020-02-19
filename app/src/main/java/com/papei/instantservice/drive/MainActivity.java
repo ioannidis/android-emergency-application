@@ -2,17 +2,22 @@ package com.papei.instantservice.drive;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
@@ -28,37 +33,53 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.papei.instantservice.R;
 import com.papei.instantservice.SettingsActivity;
 import com.papei.instantservice.drive.config.DatabaseConfig;
 import com.papei.instantservice.drive.models.ViolationModel;
+import com.papei.instantservice.panic.PanicActivity;
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Properties;
 
-public class MainActivity extends AppCompatActivity implements LocationListener, TextToSpeech.OnInitListener {
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
-    Intent intent;
-    Intent sRecIntent;
+public class MainActivity extends AppCompatActivity implements LocationListener, TextToSpeech.OnInitListener, SensorEventListener {
 
-    ActionBar actionBar;
+    private  Intent intent;
+    private Intent sRecIntent;
 
-    TextView speedTextView;
-    Button violationsButton;
-    Button mapButton;
-    Button enableButton;
-    Button disableButton;
-    FloatingActionButton speechRecognitionButton;
-    Boolean isEnabled = true;
+    private ActionBar actionBar;
+
+    private TextView speedTextView;
+    private Button violationsButton;
+    private Button mapButton;
+    private Button enableButton;
+    private Button disableButton;
+    private String emergencyPhone;
+    private String message;
+    private String emergencyEmail ;
+    private FloatingActionButton speechRecognitionButton;
+    private Boolean isEnabled = true;
 
     private boolean speedViolation;
 
     private SharedPreferences sharedPreferences;
     private int speedLimit;
+    private Double currentLatitude;
+    private Double currentLongitude;
 
     private TextToSpeech textToSpeech;
 
@@ -66,7 +87,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     private DatabaseConfig dbHandler = new DatabaseConfig(this, null, null, 1);
 
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
 
+    private static final float SHAKE_THRESHOLD = 15.00f; // m/S**2
+    private static final int MIN_TIME_BETWEEN_SHAKES_MILLISECS = 1000;
+    private long mLastShakeTime;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -100,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         // Enable back button on actionbar
         Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
 
+        getPreferences();
 
         speedViolation = false;
 
@@ -110,8 +137,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         textToSpeech = new TextToSpeech(this, this);
 
         // Preferences
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        speedLimit = Integer.valueOf(sharedPreferences.getString("speed_limit_value", "50"));
+        getPreferences();
 
         speedTextView = findViewById(R.id.speedTextView);
         violationsButton = findViewById(R.id.violations_button);
@@ -170,6 +196,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         } else {
             accessData();
         }
+
+        // Init sensor
+        Log.d("Panic Activity", "Init sensor manager");
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
@@ -211,6 +244,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         super.onResume();
         // Reinitialize the speech recognizer and text to speech engines upon resuming from background
         initializeSpeechRecognition();
+        getPreferences();
     }
 
 
@@ -221,15 +255,34 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             textToSpeech.stop();
             textToSpeech.shutdown();
         }
+        sensorManager.unregisterListener(this);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 1000) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                accessData();
-            else
-                finish();
+
+        switch (requestCode) {
+
+            case 1000: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                    accessData();
+                else
+                    finish();
+
+                break;
+            }
+            case 1001:
+            case 1002:
+            case 2000:{
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getApplicationContext(), "Permission granted", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Permission denied", Toast.LENGTH_SHORT).show();
+                }
+
+                break;
+            }
+
         }
     }
 
@@ -243,6 +296,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                 speedTextView.setText(String.valueOf(currentSpeed));
 
                 speedLimit = Integer.valueOf(sharedPreferences.getString("speed_limit_value", "50"));
+
+                currentLatitude = location.getLatitude();
+                currentLongitude = location.getLongitude();
 
                 // there is no violation if current speed is lower or equal to speed limit
                 if (currentSpeed <= speedLimit) {
@@ -261,7 +317,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                         speedViolation = true;
 
                         // Create db record
-                        ViolationModel violationModel = new ViolationModel(location.getLongitude(), location.getLatitude(), SpeedConverter.mPerSecToKmPerHr(currentSpeed), new Timestamp(System.currentTimeMillis()));
+                        ViolationModel violationModel = new ViolationModel(currentLongitude, currentLatitude, SpeedConverter.mPerSecToKmPerHr(currentSpeed), new Timestamp(System.currentTimeMillis()));
 
                         // Save the db record
                         dbHandler.addViolation(violationModel);
@@ -344,6 +400,50 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
     }
 
+    // Sensor methods
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        if (sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+
+            long curTime = System.currentTimeMillis();
+            if ((curTime - mLastShakeTime) > MIN_TIME_BETWEEN_SHAKES_MILLISECS) {
+
+                float x = sensorEvent.values[0];
+                float y = sensorEvent.values[1];
+                float z = sensorEvent.values[2];
+
+                double acceleration = Math.sqrt(Math.pow(x, 2) +
+                        Math.pow(y, 2) +
+                        Math.pow(z, 2)) - SensorManager.GRAVITY_EARTH;
+                Log.d("Drive Main Activity", "Acceleration is " + acceleration + "m/s^2");
+
+                if (acceleration > SHAKE_THRESHOLD) {
+                    mLastShakeTime = curTime;
+
+                    Log.d("Accelerometer Sensor", "CRASH DETECTED");
+
+                    AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                    alert.setTitle("ABRUPT SPEED DECREASE");
+                    alert.setMessage("Are you ok? Do you need help?");
+
+                    alert.setPositiveButton("I Need help", (dialogInterface, i) -> {
+                        sendMessages();
+                    });
+                    alert.setNegativeButton("No thanks", (dialogInterface, i) -> {
+                    });
+                    alert.create().show();
+
+                }
+            }
+
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
+
     // Check activity results for speech recognition request code and then call the speech result
     // call processSpeechResult to process the results
     @Override
@@ -357,6 +457,66 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             System.out.println(results);
             processSpeechResult(results.get(0));
         }
+    }
+
+    private void sendMessages() {
+        // SMS
+        try {
+//                SmsManager smsManager = SmsManager.getDefault();
+//                smsManager.sendTextMessage(emergencyPhone,null, message,null,null);
+            Toast.makeText(this, "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "SMS Failed to Send, Please try again", Toast.LENGTH_SHORT).show();
+        }
+
+        // Email
+        try {
+            new Thread(() -> {
+
+                final String username = "53ded0fa773e92";
+                final String password = "d9c7cc18061330";
+
+                Properties props = new Properties();
+                props.put("mail.smtp.auth", "true");
+                props.put("mail.smtp.starttls.enable", "true");
+                props.put("mail.smtp.host", "smtp.mailtrap.io");
+                props.put("mail.smtp.port", "2525");
+
+                Session session = Session.getInstance(props,
+                        new javax.mail.Authenticator() {
+                            protected PasswordAuthentication getPasswordAuthentication() {
+                                return new PasswordAuthentication(username, password);
+                            }
+                        });
+                try {
+                    Message message = new MimeMessage(session);
+                    message.setFrom(new InternetAddress("EmergencyApp@unipi.gr"));
+                    message.setRecipients(Message.RecipientType.TO,
+                            InternetAddress.parse(emergencyEmail));
+                    message.setSubject("Car accident! I need help!");
+                    message.setText("I HAD A CAR ACCIDENT!!! Please come as soon as possible! Its urgent!!!" +
+                            "\nMy location is https://www.google.com/maps/search/?api=1&query=" + currentLatitude + "," + currentLongitude);
+
+                    Transport.send(message);
+
+                } catch (MessagingException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }).start();
+            Toast.makeText(this, "Email Sent Successfully", Toast.LENGTH_SHORT).show();
+        }
+        catch (ActivityNotFoundException ex) {
+            Toast.makeText(this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Get preferences
+    private void getPreferences() {
+        sharedPreferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
+        emergencyPhone = sharedPreferences.getString("emergency_phone", "");
+        emergencyEmail = sharedPreferences.getString("emergency_email", "");
+        speedLimit = Integer.valueOf(sharedPreferences.getString("speed_limit_value", "50"));
     }
 
     // Add functionality to back button
