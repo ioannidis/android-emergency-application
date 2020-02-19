@@ -1,7 +1,11 @@
 package com.papei.instantservice.doctor;
 
+import android.app.Service;
+import android.content.Context;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +30,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.papei.instantservice.R;
 
 import java.util.ArrayList;
+
+import static android.content.Context.VIBRATOR_SERVICE;
+import static androidx.core.content.ContextCompat.getSystemService;
 
 public class DoctorFragment extends Fragment {
     private FirebaseUser user;
@@ -53,6 +60,7 @@ public class DoctorFragment extends Fragment {
         this.messageEditText.setOnEditorActionListener(createEditorActionListener());
         this.doctorProgressLinearLayout = view.findViewById(R.id.doctorProgressLinearLayout);
         this.messagesLinearLayout = view.findViewById(R.id.messagesLinearLayout);
+
         return view;
     }
 
@@ -82,6 +90,12 @@ public class DoctorFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Message message = snapshot.getValue(Message.class);
                     messages.add(message);
+                }
+
+                Message last = messages.get(messages.size() - 1);
+
+                if (last.checkDoctor()) {
+                    vibrate();
                 }
 
                 messageAdapter.notifyDataSetChanged();
@@ -115,11 +129,12 @@ public class DoctorFragment extends Fragment {
 
         String username = user.getDisplayName();
         long timestamp = System.currentTimeMillis();
-
-        dbRef.push().setValue(
-                new Message(username, messageValue, timestamp, false)
-        );
-
+        dbRef.push().setValue(new Message(username, messageValue, timestamp));
         messageEditText.getText().clear();
+    }
+
+    private void vibrate() {
+        Vibrator vibrator = (Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE);
+        vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 }

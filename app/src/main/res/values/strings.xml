@@ -151,6 +151,7 @@
     <string name="biometric_login">Biometric login</string>
     <string name="biometric_credential">Log in using your biometric credential</string>
     <string name="use_password">Use account password</string>
+    <string name="home_unknown_speech_command">Please try one of the following commands: doctor, alerts, driving mode, disability mode.</string>
 
     <string-array name="languages">
         <item>English</item>

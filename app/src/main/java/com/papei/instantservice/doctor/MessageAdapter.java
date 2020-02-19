@@ -25,7 +25,7 @@ class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     public int getItemViewType(int position) {
         Message message = this.messages.get(position);
 
-        if (message.isDoctor()) {
+        if (message.checkDoctor()) {
             return 0;
         } else {
             return 1;

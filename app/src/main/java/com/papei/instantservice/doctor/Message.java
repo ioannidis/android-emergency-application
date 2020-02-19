@@ -4,13 +4,11 @@ public class Message {
     private String username;
     private String message;
     private long timestamp;
-    private boolean isDoctor;
 
-    public Message(String username, String message, long timestamp, boolean isDoctor) {
+    public Message(String username, String message, long timestamp) {
         this.username = username;
         this.message = message;
         this.timestamp = timestamp;
-        this.isDoctor = isDoctor;
     }
 
     public Message() {
@@ -41,11 +39,7 @@ public class Message {
         this.timestamp = timestamp;
     }
 
-    public boolean isDoctor() {
-        return isDoctor;
-    }
-
-    public void setDoctor(boolean doctor) {
-        isDoctor = doctor;
+    public boolean checkDoctor() {
+        return this.username.toLowerCase().contains("doctor");
     }
 }
