@@ -19,23 +19,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
-        android:configChanges="locale">
+        android:configChanges="layoutDirection|locale">
         <activity
             android:name=".AboutActivity"
             android:label="@string/about"
-            android:configChanges="locale" />
+            android:configChanges="layoutDirection|locale" />
         <activity
             android:name=".HomeHelpActivity"
             android:label="@string/title_activity_help"
-            android:configChanges="locale"/>
+            android:configChanges="layoutDirection|locale"/>
         <activity
             android:name=".alerts.AlertsHelpActivity"
             android:label="@string/title_activity_help"
-            android:configChanges="locale"/>
+            android:configChanges="layoutDirection|locale"/>
         <activity
             android:name=".doctor.DoctorHelpActivity"
             android:label="@string/title_activity_help"
-            android:configChanges="locale"/>
+            android:configChanges="layoutDirection|locale"/>
         <activity
             android:name=".alerts.CreateAlertActivity"
             android:label="Create Alert" />
@@ -54,12 +54,12 @@
             android:resource="@color/colorAccent" />
 
         <activity android:name=".FingerprintActivity"
-            android:configChanges="locale"/>
+            android:configChanges="layoutDirection|locale"/>
         <activity android:name=".HomeActivity"
-            android:configChanges="locale"/>
+            android:configChanges="layoutDirection|locale"/>
         <activity
             android:name=".SettingsActivity"
-            android:configChanges="locale"
+            android:configChanges="layoutDirection|locale"
             android:label="@string/title_activity_settings" />
         <activity android:name=".SignInActivity">
             <intent-filter>
@@ -69,11 +69,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".drive.HelpActivity"
-            android:configChanges="locale"/>
+            android:configChanges="layoutDirection|locale"/>
         <activity android:name=".drive.AboutActivity"
-            android:configChanges="locale"/>
+            android:configChanges="layoutDirection|locale"/>
         <activity android:name=".drive.ViolationDetailsActivity"
-            android:configChanges="locale"/>
+            android:configChanges="layoutDirection|locale"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -89,19 +89,19 @@
         <activity
             android:name=".drive.MapsActivity"
             android:label="@string/title_activity_maps"
-            android:configChanges="locale"/>
+            android:configChanges="layoutDirection|locale"/>
         <activity
             android:name=".drive.ViolationsActivity"
             android:label="@string/title_activity_violations"
-            android:configChanges="locale"/>
+            android:configChanges="layoutDirection|locale"/>
         <activity
             android:name=".drive.MainActivity"
             android:label="@string/driving_mode_title"
-            android:configChanges="locale"/>
+            android:configChanges="layoutDirection|locale"/>
         <activity
             android:name=".panic.PanicActivity"
             android:label="@string/disability_mode_title"
-            android:configChanges="locale"/>
+            android:configChanges="layoutDirection|locale"/>
     </application>
 
 </manifest>
