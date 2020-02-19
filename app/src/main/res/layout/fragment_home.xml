@@ -27,12 +27,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:minHeight="103dp">
 
             <Button
                 android:id="@+id/driving_mode_button"
                 android:layout_width="match_parent"
-                android:layout_height="103dp"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="0.5"
                 android:onClick="drivingModeActivity"
@@ -42,7 +43,7 @@
             <Button
                 android:id="@+id/disability_mode_button"
                 android:layout_width="match_parent"
-                android:layout_height="103dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
                 android:layout_weight="0.5"
                 android:onClick="panicActivity"
