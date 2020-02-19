@@ -33,14 +33,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.papei.instantservice.R;
 import com.papei.instantservice.SettingsActivity;
 import com.papei.instantservice.drive.config.DatabaseConfig;
 import com.papei.instantservice.drive.models.ViolationModel;
-import com.papei.instantservice.panic.PanicActivity;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -58,7 +56,7 @@ import javax.mail.internet.MimeMessage;
 
 public class MainActivity extends AppCompatActivity implements LocationListener, TextToSpeech.OnInitListener, SensorEventListener {
 
-    private  Intent intent;
+    private Intent intent;
     private Intent sRecIntent;
 
     private ActionBar actionBar;
