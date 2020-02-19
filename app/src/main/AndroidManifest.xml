@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".AboutActivity" android:label="@string/about"/>
         <activity
             android:name=".HomeHelpActivity"
             android:label="@string/title_activity_help"
@@ -53,12 +54,10 @@
         <activity android:name=".HomeActivity"
             android:configChanges="locale"/>
         <activity
-            android:configChanges="locale"
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            />
-        <activity android:name=".SignInActivity"
-            android:configChanges="locale">
+            android:configChanges="locale"
+            android:label="@string/title_activity_settings" />
+        <activity android:name=".SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

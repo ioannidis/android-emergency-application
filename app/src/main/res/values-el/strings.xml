@@ -129,4 +129,5 @@
     <string name="use_password">Χρήση κωδικού</string>
     <string name="warning_speed">Προειδοποίηση! Έχετε υπερβεί το όριο ταχύτητας.</string>
     <string name="home_unknown_speech_command">Παρακαλώ πείτε ένα από τα παρακάτω: doctor, alerts, driving mode, disability mode.</string>
+    <string name="about">Περί</string>
 </resources>

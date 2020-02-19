@@ -92,10 +92,12 @@ public class DoctorFragment extends Fragment {
                     messages.add(message);
                 }
 
-                Message last = messages.get(messages.size() - 1);
+                if (messages.size() - 1 >= 0) {
+                    Message last = messages.get(messages.size() - 1);
 
-                if (last.checkDoctor()) {
-                    vibrate();
+                    if (last.checkDoctor()) {
+                        vibrate();
+                    }
                 }
 
                 messageAdapter.notifyDataSetChanged();

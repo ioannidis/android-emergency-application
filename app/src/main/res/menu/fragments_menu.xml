@@ -7,6 +7,9 @@
         android:id="@+id/settingsMenuItem"
         android:title="@string/settings" />
     <item
+        android:id="@+id/aboutMenuItem"
+        android:title="@string/about" />
+    <item
         android:id="@+id/signOutMenuItem"
         android:title="@string/sign_out"/>
 </menu>
