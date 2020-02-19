@@ -1,7 +1,10 @@
 package com.papei.instantservice;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +29,8 @@ import com.papei.instantservice.doctor.DoctorHelpActivity;
 import com.papei.instantservice.drive.MainActivity;
 import com.papei.instantservice.panic.PanicActivity;
 
+import java.util.Locale;
+
 public class HomeActivity extends AppCompatActivity {
     private static String lastFragmentName;
     private FirebaseAuth firebaseAuth;
@@ -45,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
         this.actionBar = getSupportActionBar();
         this.fragmentManager = getSupportFragmentManager();
         this.subscribeToTopics();
+
         this.getPreferences();
 
         this.bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -56,6 +62,22 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         emergencyPhone = sharedPreferences.getString("emergency_phone", "");
         emergencyEmail = sharedPreferences.getString("emergency_email", "");
+        String lang = sharedPreferences.getString("language_value", "en");
+        checkLocale(lang);
+    }
+
+    void checkLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+
+        Context context = getBaseContext();
+        Configuration configuration = context.getResources().getConfiguration();
+        configuration.setLocale(locale);
+
+        Resources resources =  getApplicationContext().getResources();
+
+        context.createConfigurationContext(configuration);
+        context.getResources().updateConfiguration(configuration, resources.getDisplayMetrics());
     }
 
     @Override

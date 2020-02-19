@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -130,8 +131,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         actionBar.setTitle(R.string.driving_mode_title);
         // Enable back button on actionbar
         Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
-
-        getPreferences();
 
         speedViolation = false;
 
@@ -524,6 +523,22 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         emergencyPhone = sharedPreferences.getString("emergency_phone", "");
         emergencyEmail = sharedPreferences.getString("emergency_email", "");
         speedLimit = Integer.valueOf(sharedPreferences.getString("speed_limit_value", "50"));
+        String lang = sharedPreferences.getString("language_value", "en");
+        checkLocale(lang);
+    }
+
+    void checkLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+
+        Context context = getBaseContext();
+        Configuration configuration = context.getResources().getConfiguration();
+        configuration.setLocale(locale);
+
+        Resources resources =  getApplicationContext().getResources();
+
+        context.createConfigurationContext(configuration);
+        context.getResources().updateConfiguration(configuration, resources.getDisplayMetrics());
     }
 
     // Add functionality to back button

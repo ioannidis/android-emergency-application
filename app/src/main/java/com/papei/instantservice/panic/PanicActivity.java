@@ -14,6 +14,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -319,6 +321,22 @@ public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnI
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         emergencyPhone = sharedPreferences.getString("emergency_phone", "");
         emergencyEmail = sharedPreferences.getString("emergency_email", "");
+        String lang = sharedPreferences.getString("language_value", "en");
+        checkLocale(lang);
+    }
+
+    void checkLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+
+        Context context = getBaseContext();
+        Configuration configuration = context.getResources().getConfiguration();
+        configuration.setLocale(locale);
+
+        Resources resources =  getApplicationContext().getResources();
+
+        context.createConfigurationContext(configuration);
+        context.getResources().updateConfiguration(configuration, resources.getDisplayMetrics());
     }
 
     // Check activity results for speech recognition request code and then call the speech result
@@ -399,5 +417,11 @@ public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnI
         else{
             Log.i("DEBUG" , "MISSION FAILED");
         }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        // refresh your views here
+        super.onConfigurationChanged(newConfig);
     }
 }
