@@ -90,5 +90,13 @@
     <string name="disability_mode_button">Λειτουργία για άτομα με ειδικές ανάγκες</string>
     <string name="disability_mode_help_label">Λειτουργία για άτομα με ειδικές ανάγκες</string>
     <string name="disability_mode_title">Λειτουργία για άτομα με ειδικές ανάγκες</string>
+    <string name="call_emergency_contact_help">Αν χρειαστεί να καλέσετε αμέσως την επαφή έκτακτης ανάγκης, πατήστε το κουμπί κλήσης έκτακτης ανάγκης</string>
+    <string name="call_emergency_contact_help_label">Κλήση επαφής έκτακτης ανάγκης</string>
+    <string name="call_the_hospital_help">Αν χρειαστεί να καλέσετε ένα νοσοκομείο επιγόντως, πατήστε το κουμπί κλήσης νοσοκομείου</string>
+    <string name="call_the_hospital_help_label">Κλήση νοσοκομείου</string>
+    <string name="panic_speech_recognition_help">Αν κάνετε κλικ στο κουμπί με το μικρόφωνο, μπορείτε να ενεργοποιήσετε την αναγνώριση ομιλίας! Μπορείτε να εκτελέσετε την εντολή σας λέγοντας μία από τις ακόλουθες λέξεις:</string>
+    <string name="panic_speech_recognition_help_2">1. \'Send message\' για να στείλετε το μήνυμα ηλεκτρονικού ταχυδρομείου έκτακτης ανάγκης και το μήνυμα κειμένου. 2. \'Call hospital\' για να καλέσετε αμέσως το νοσοκομείο. 3. \'Call emergency contact\' για να καλέσετε αμέσως την επαφή έκτακτης ανάγκης.</string>
+    <string name="send_message_help">Πατήστε το κουμπί αποστολής μηνύματος για να στείλετε αμέσως ένα μήνυμα ηλεκτρονικού ταχυδρομείου και ένα μήνυμα κειμένου στην επαφή έκτακτης ανάγκης</string>
+    <string name="send_message_help_label">Αποστολή μηνύματος</string>
 
 </resources>
