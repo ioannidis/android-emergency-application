@@ -1,89 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".drive.MainActivity">
 
-    <Button
-        android:id="@+id/violations_button"
-        android:layout_width="190dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:foregroundTint="#1AFFFEFE"
-        android:text="@string/title_activity_violations"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/map_button"
-        android:layout_width="190dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="12dp"
-        android:foregroundTint="#1AFFFEFE"
-        android:text="@string/title_activity_map"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/speedTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/zeroSpeed"
-        android:textSize="56sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437" />
+        android:orientation="vertical"
+        android:layout_margin="30dp"
+        android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/metric"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/metric"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/speedTextView"
-        app:layout_constraintVertical_bias="0.027" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="50dp">
 
-    <Button
-        android:id="@+id/enableButton"
-        android:layout_width="135dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginBottom="208dp"
-        android:foregroundTint="#1AFFFEFE"
-        android:text="@string/enable"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <Button
+                android:id="@+id/violations_button"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_weight="0.5"
+                android:foregroundTint="#1AFFFEFE"
+                android:text="@string/title_activity_violations"
+                android:layout_marginEnd="5dp"/>
 
-    <Button
-        android:id="@+id/disableButton"
-        android:layout_width="135dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="208dp"
-        android:text="@string/disable"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/enableButton" />
+            <Button
+                android:id="@+id/map_button"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_weight="0.5"
+                android:foregroundTint="#1AFFFEFE"
+                android:text="@string/title_activity_map"
+                android:layout_marginStart="5dp"/>
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="160dp"
-        android:textColor="#C7C6C6"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/speedTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/zeroSpeed"
+            android:textSize="56sp"
+            android:textStyle="normal"/>
+
+        <TextView
+            android:id="@+id/metric"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/metric"
+            android:textSize="30sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="50dp">
+
+            <Button
+                android:id="@+id/enableButton"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_weight="0.5"
+                android:foregroundTint="#1AFFFEFE"
+                android:text="@string/enable"
+                android:layout_marginEnd="5dp"/>
+
+            <Button
+                android:id="@+id/disableButton"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:layout_weight="0.5"
+                android:text="@string/disable"
+                android:layout_marginStart="5dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#C7C6C6"
+            android:textSize="20sp"
+            android:layout_marginTop="50dp"/>
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/speech_recognition_fab"
@@ -94,6 +97,7 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_mic_black_24dp" />
+        app:srcCompat="@drawable/ic_mic_black_24dp"
+        android:layout_gravity="bottom|end"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
