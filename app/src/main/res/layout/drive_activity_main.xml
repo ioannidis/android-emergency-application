@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:foregroundTint="#1AFFFEFE"
-        android:text="Violations"
+        android:text="@string/title_activity_violations"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,7 +24,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="12dp"
         android:foregroundTint="#1AFFFEFE"
-        android:text="Map"
+        android:text="@string/title_activity_map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,7 +60,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginBottom="208dp"
         android:foregroundTint="#1AFFFEFE"
-        android:text="Enable"
+        android:text="@string/enable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -70,7 +70,7 @@
         android:layout_height="57dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="208dp"
-        android:text="Disable"
+        android:text="@string/disable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/enableButton" />
 

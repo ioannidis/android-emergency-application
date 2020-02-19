@@ -184,7 +184,7 @@ public class ViolationsActivity extends AppCompatActivity {
             }
             case R.id.filter_custom: {
                 if (dateFromTextView.getText().toString().contains("---") || dateToTextView.getText().toString().contains("---")) {
-                    Toast.makeText(this, "Select dates and try again!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.select_again, Toast.LENGTH_SHORT).show();
                     break;
                 }
                 items = dbHandler.getViolationsByTimestamp(dateFromTextView.getText().toString(), dateToTextView.getText().toString());

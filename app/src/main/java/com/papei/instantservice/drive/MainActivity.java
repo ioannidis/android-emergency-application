@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.Sensor;
@@ -33,6 +34,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.papei.instantservice.R;
@@ -163,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             isEnabled = true;
             buttonBgColor();
             accessData();
-            Toast.makeText(this, "Speed capture is enabled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.enable_speed, Toast.LENGTH_SHORT).show();
         });
 
         // Disable button listener
@@ -173,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             isEnabled = false;
             buttonBgColor();
             speedTextView.setText("---");
-            Toast.makeText(this, "Speed capture is disabled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.disable_speed, Toast.LENGTH_SHORT).show();
         });
 
 
@@ -182,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, 2000);
             } else {
-                Toast.makeText(this, "Please speak now!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.please_speak, Toast.LENGTH_LONG).show();
                 startActivityForResult(sRecIntent,1001);
 
             }
@@ -273,9 +275,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             case 1002:
             case 2000:{
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getApplicationContext(), "Permission granted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.permission_granted, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Permission denied", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.permission_denied, Toast.LENGTH_SHORT).show();
                 }
 
                 break;
@@ -297,7 +299,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
                 currentLatitude = location.getLatitude();
                 currentLongitude = location.getLongitude();
-
                 // there is no violation if current speed is lower or equal to speed limit
                 if (currentSpeed <= speedLimit) {
                     speedViolation = false;
@@ -309,7 +310,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                     speedTextView.setTextColor(Color.RED);
                     actionBar.setBackgroundDrawable(new ColorDrawable(Color.RED));
 
-                    textToSpeech.speak("Caution! You have exceeded the speed limit.", TextToSpeech.QUEUE_ADD, null, null);
+
+
+                    textToSpeech.setLanguage(Locale.getDefault());
+                    textToSpeech.speak(getString(R.string.warning_speed), TextToSpeech.QUEUE_ADD, null, null);
 
                     if (!speedViolation) {
                         speedViolation = true;
@@ -342,7 +346,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         if (locationManager != null && isEnabled) {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         }
-        Toast.makeText(this, "Waiting for GPS connection", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.gps_connection, Toast.LENGTH_SHORT).show();
     }
 
     private void buttonBgColor() {
@@ -387,12 +391,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
             }else if (command.contains("map")) {
                 mapButton.performClick();
             } else {
-                Toast.makeText(this, "Available commands are 'start', 'stop', 'violations', 'map'", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.available_commands_drive, Toast.LENGTH_LONG).show();
             }
 
         } else {
-            Toast.makeText(this, "Initialize speech recognition say 'speed' or 'speedometer' following by your command!", Toast.LENGTH_LONG).show();
-            textToSpeech.speak("Start with 'speed' or speedometer following by your command!", TextToSpeech.QUEUE_ADD, null, null);
+            Toast.makeText(this, R.string.init_speech_drive, Toast.LENGTH_LONG).show();
+            textToSpeech.speak(getString(R.string.TTS_start_drive), TextToSpeech.QUEUE_ADD, null, null);
         }
 
 
@@ -421,13 +425,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                     Log.d("Accelerometer Sensor", "CRASH DETECTED");
 
                     AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                    alert.setTitle("ABRUPT SPEED DECREASE");
-                    alert.setMessage("Are you ok? Do you need help?");
+                    alert.setTitle(R.string.speed_alert_decrease);
+                    alert.setMessage(R.string.need_help_quest);
 
-                    alert.setPositiveButton("I Need help", (dialogInterface, i) -> {
+                    alert.setPositiveButton(R.string.need_help, (dialogInterface, i) -> {
                         sendMessages();
                     });
-                    alert.setNegativeButton("No thanks", (dialogInterface, i) -> {
+                    alert.setNegativeButton(R.string.no_thanks, (dialogInterface, i) -> {
                     });
                     alert.create().show();
 
@@ -462,9 +466,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         try {
 //                SmsManager smsManager = SmsManager.getDefault();
 //                smsManager.sendTextMessage(emergencyPhone,null, message,null,null);
-            Toast.makeText(this, "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.sms_success, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(this, "SMS Failed to Send, Please try again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.sms_fail, Toast.LENGTH_SHORT).show();
         }
 
         // Email
@@ -502,10 +506,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                 }
 
             }).start();
-            Toast.makeText(this, "Email Sent Successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.email_sucess, Toast.LENGTH_SHORT).show();
         }
         catch (ActivityNotFoundException ex) {
-            Toast.makeText(this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.no_client, Toast.LENGTH_SHORT).show();
         }
     }
 

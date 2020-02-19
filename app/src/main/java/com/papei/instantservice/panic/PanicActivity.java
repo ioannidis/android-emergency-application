@@ -86,7 +86,7 @@ public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnI
 
         getPreferences();
 
-        message = "I need help, this is urgent!!!";
+        message = getString(R.string.need_help_urgent);
 
         messagesButton = findViewById(R.id.sosButton);
         hospitalButton = findViewById(R.id.hospitalButton);
@@ -152,7 +152,7 @@ public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnI
             if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, 2000);
             } else {
-                Toast.makeText(this, "Please speak now!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.please_speak, Toast.LENGTH_LONG).show();
                 startActivityForResult(intent,2000);
 
             }
@@ -192,9 +192,9 @@ public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnI
             case 2000:{
 
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getApplicationContext(), "Permission granted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.permission_granted, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Permission denied", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.permission_denied, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -225,8 +225,8 @@ public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnI
         }else if (command.contains("call contact")) {
             callButton.performClick();
         } else {
-            Toast.makeText(this, "The available commands are 'send message', 'call hospital', 'call contact'", Toast.LENGTH_LONG).show();
-            textToSpeech.speak("The available commands are 'send message', 'call hospital', 'call contact'", TextToSpeech.QUEUE_ADD, null, null);
+            Toast.makeText(this, R.string.commands_panic, Toast.LENGTH_LONG).show();
+            textToSpeech.speak(getString(R.string.TTS_panic), TextToSpeech.QUEUE_ADD, null, null);
         }
     }
 
@@ -254,13 +254,13 @@ public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnI
                     Log.d("Accelerometer Sensor", "FALL DETECTED");
 
                     AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                    alert.setTitle("FALL DETECTED!");
-                    alert.setMessage("Are you ok? Do you need help?");
+                    alert.setTitle(R.string.fall_detected);
+                    alert.setMessage(R.string.need_help_quest);
 
-                    alert.setPositiveButton("I Need help", (dialogInterface, i) -> {
+                    alert.setPositiveButton(R.string.need_help, (dialogInterface, i) -> {
                         sendMessages();
                     });
-                    alert.setNegativeButton("No thanks", (dialogInterface, i) -> {
+                    alert.setNegativeButton(R.string.no_thanks, (dialogInterface, i) -> {
                     });
                     alert.create().show();
 
@@ -335,9 +335,9 @@ public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnI
         try {
 //                SmsManager smsManager = SmsManager.getDefault();
 //                smsManager.sendTextMessage(emergencyPhone,null, message,null,null);
-            Toast.makeText(PanicActivity.this, "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PanicActivity.this, R.string.sms_success, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(this, "SMS Failed to Send, Please try again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.sms_fail, Toast.LENGTH_SHORT).show();
         }
 
         // Email
@@ -374,10 +374,10 @@ public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnI
                 }
 
             }).start();
-            Toast.makeText(PanicActivity.this, "Email Sent Successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PanicActivity.this, R.string.email_sucess, Toast.LENGTH_SHORT).show();
         }
         catch (ActivityNotFoundException ex) {
-            Toast.makeText(PanicActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PanicActivity.this, R.string.no_client, Toast.LENGTH_SHORT).show();
         }
     }
 

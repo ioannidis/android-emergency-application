@@ -52,9 +52,9 @@ public class HomeFragment extends Fragment {
             try {
 //                SmsManager smsManager = SmsManager.getDefault();
 //                smsManager.sendTextMessage(emergencyPhone,null, message,null,null);
-                Toast.makeText(getContext(), "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.sms_success, Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
-                Toast.makeText(getContext(), "SMS Failed to Send, Please try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.sms_fail, Toast.LENGTH_SHORT).show();
             }
 
             try {

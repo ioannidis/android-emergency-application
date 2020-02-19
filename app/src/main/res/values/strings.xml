@@ -121,6 +121,36 @@
     <string name="call_the_hospital_help">If you need to call a hospital immediately press the call hospital button</string>
     <string name="call_emergency_contact_help_label">Call emergency contact</string>
     <string name="call_emergency_contact_help">If you need to call immediately your emergency contact then press call emergency contact button</string>
+    <string name="enable">Enable</string>
+    <string name="disable">Disable</string>
+    <string name="enable_speed">Speed capture is enabled</string>
+    <string name="disable_speed">Speed capture is disabled</string>
+    <string name="please_speak">Please speak now!</string>
+    <string name="permission_granted">Permission granted</string>
+    <string name="permission_denied">Permission denied</string>
+    <string name="warning_speed">Warning! You have exceeded the speed limit.</string>
+    <string name="gps_connection">Waiting for GPS connection</string>
+    <string name="available_commands_drive">Available commands are \'start\', \'stop\', \'violations\', \'map\'</string>
+    <string name="init_speech_drive">Initialize speech recognition say \'speed\' or \'speedometer\' following by your command!</string>
+    <string name="TTS_start_drive">Start with \'speed\' or speedometer following by your command!</string>
+    <string name="speed_alert_decrease">ABRUPT SPEED DECREASE</string>
+    <string name="need_help_quest">Are you ok? Do you need help?</string>
+    <string name="need_help">I Need help</string>
+    <string name="no_thanks">No thanks</string>
+    <string name="sms_success">SMS Sent Successfully</string>
+    <string name="sms_fail">SMS Failed to Send, Please try again</string>
+    <string name="email_sucess">Email Sent Successfully</string>
+    <string name="no_client">There is no email client installed.</string>
+    <string name="select_again">Select dates and try again!</string>
+    <string name="need_help_urgent">I need help, this is urgent!!!</string>
+    <string name="commands_panic">The available commands are \'send message\', \'call hospital\', \'call contact\'</string>
+    <string name="TTS_panic">The available commands are \'send message\', \'call hospital\', \'call contact\'</string>
+    <string name="fall_detected">FALL DETECTED!</string>
+    <string name="auth_fail">Authentication error:</string>
+    <string name="auth_success">Authentication succeeded!</string>
+    <string name="biometric_login">Biometric login</string>
+    <string name="biometric_credential">Log in using your biometric credential</string>
+    <string name="use_password">Use account password</string>
 
     <string-array name="languages">
         <item>English</item>
