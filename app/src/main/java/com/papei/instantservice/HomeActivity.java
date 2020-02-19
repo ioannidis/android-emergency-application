@@ -50,7 +50,6 @@ public class HomeActivity extends AppCompatActivity {
         this.bottomNavigationView = findViewById(R.id.bottomNavigationView);
         this.bottomNavigationView.setOnNavigationItemSelectedListener(this.createSelectionListener());
         this.navigateToLastFragment();
-
     }
 
     private void getPreferences() {
@@ -124,11 +123,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void navigateToLastFragment() {
-        if (lastFragmentName == null || lastFragmentName.equals(getString(R.string.home))) {
+        if (lastFragmentName == null || lastFragmentName.equals("home")) {
             this.bottomNavigationView.setSelectedItemId(R.id.homeMenuItem);
-        } else if (lastFragmentName.equals(getString(R.string.doctor))) {
+        } else if (lastFragmentName.equals("doctor")) {
             this.bottomNavigationView.setSelectedItemId(R.id.doctorMenuItem);
-        } else if (lastFragmentName.equals(getString(R.string.alerts))) {
+        } else if (lastFragmentName.equals("alerts")) {
             this.bottomNavigationView.setSelectedItemId(R.id.alertsMenuItem);
         }
     }
@@ -138,7 +137,7 @@ public class HomeActivity extends AppCompatActivity {
         this.fragmentManager.beginTransaction().replace(R.id.mainFrameLayout, fragment).commit();
         this.actionBar.setTitle(R.string.home);
         this.actionBar.setSubtitle(this.user.getDisplayName());
-        lastFragmentName = getString(R.string.home);
+        lastFragmentName = "home";
     }
 
     private void navigateDoctorFragment() {
@@ -146,7 +145,7 @@ public class HomeActivity extends AppCompatActivity {
         this.fragmentManager.beginTransaction().replace(R.id.mainFrameLayout, fragment).commit();
         this.actionBar.setTitle(R.string.doctor);
         this.actionBar.setSubtitle(null);
-        lastFragmentName = getString(R.string.doctor);
+        lastFragmentName = "doctor";
     }
 
     private void navigateAlertsFragment() {
@@ -154,7 +153,7 @@ public class HomeActivity extends AppCompatActivity {
         this.fragmentManager.beginTransaction().replace(R.id.mainFrameLayout, fragment).commit();
         this.actionBar.setTitle(R.string.alerts);
         this.actionBar.setSubtitle(null);
-        lastFragmentName = getString(R.string.alerts);
+        lastFragmentName = "alerts";
     }
 
     private void signOut() {
