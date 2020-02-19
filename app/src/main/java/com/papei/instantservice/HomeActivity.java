@@ -46,6 +46,7 @@ public class HomeActivity extends AppCompatActivity {
         this.fragmentManager = getSupportFragmentManager();
         this.subscribeToTopics();
         this.getPreferences();
+
         this.bottomNavigationView = findViewById(R.id.bottomNavigationView);
         this.bottomNavigationView.setOnNavigationItemSelectedListener(this.createSelectionListener());
         this.navigateToLastFragment();

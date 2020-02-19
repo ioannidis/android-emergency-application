@@ -1,51 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".HomeFragment">
 
-    <Button
-        android:id="@+id/driving_mode_button"
-        android:layout_width="173dp"
-        android:layout_height="103dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="28dp"
-        android:onClick="drivingModeActivity"
-        android:text="@string/driving_mode_button"
-        android:textColor="#000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/panic_button" />
 
-    <Button
-        android:id="@+id/panic_button"
-        android:layout_width="355dp"
-        android:layout_height="98dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="164dp"
-        android:layout_marginEnd="28dp"
-        android:background="#E00707"
-        android:onClick="drivingModeActivity"
-        android:text="@string/panic_button"
-        android:textColor="#fff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/panic_button"
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            android:background="#E00707"
+            android:text="@string/panic_button"
+            android:textColor="#fff" />
 
-    <Button
-        android:id="@+id/disability_mode_button"
-        android:layout_width="173dp"
-        android:layout_height="103dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="28dp"
-        android:onClick="panicActivity"
-        android:text="@string/disability_mode_button"
-        android:textColor="#000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/panic_button" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:orientation="horizontal"
+            android:minHeight="103dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/driving_mode_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="0.5"
+                android:onClick="drivingModeActivity"
+                android:text="@string/driving_mode_button"
+                android:textColor="#000" />
+
+            <Button
+                android:id="@+id/disability_mode_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_weight="0.5"
+                android:onClick="panicActivity"
+                android:text="@string/disability_mode_button"
+                android:textColor="#000" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/speechButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/ic_mic_black_24dp"
+        android:layout_margin="15dp"
+        android:layout_gravity="bottom|end"/>
+</FrameLayout>

@@ -33,7 +33,6 @@ public class AlertService extends FirebaseMessagingService {
                         .setStyle(new NotificationCompat.BigTextStyle())
                         .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                         .setSmallIcon(R.drawable.ic_announcement_black_24dp)
-                        .setDefaults(Notification.DEFAULT_VIBRATE)
                         .setAutoCancel(true);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
