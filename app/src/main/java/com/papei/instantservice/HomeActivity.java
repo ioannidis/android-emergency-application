@@ -94,6 +94,9 @@ public class HomeActivity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.settingsMenuItem) {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingsIntent);
+        } else if (item.getItemId() == R.id.aboutMenuItem) {
+            Intent settingsIntent = new Intent(this, AboutActivity.class);
+            startActivity(settingsIntent);
         } else if (item.getItemId() == R.id.signOutMenuItem) {
             signOut();
 

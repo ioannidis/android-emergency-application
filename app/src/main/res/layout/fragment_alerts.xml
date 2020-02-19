@@ -33,7 +33,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="15dp"
+        android:alpha="0"
         android:clickable="true"
-        android:src="@drawable/ic_add_black_24dp" />
+        android:src="@drawable/ic_add_black_24dp"
+        app:borderWidth="0dp" />
 
 </FrameLayout>

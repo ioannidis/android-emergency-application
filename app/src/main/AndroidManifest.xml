@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".AboutActivity" android:label="@string/about"/>
         <activity
             android:name=".HomeHelpActivity"
             android:label="@string/title_activity_help" />
@@ -48,8 +49,8 @@
         <activity android:name=".FingerprintActivity" />
         <activity android:name=".HomeActivity" />
         <activity
-            android:configChanges="locale"
             android:name=".SettingsActivity"
+            android:configChanges="locale"
             android:label="@string/title_activity_settings" />
         <activity android:name=".SignInActivity">
             <intent-filter>
