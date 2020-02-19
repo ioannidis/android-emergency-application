@@ -37,6 +37,7 @@ public class SettingsActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDefaultDisplayHomeAsUpEnabled(true);
         }
+        getSupportActionBar().setTitle(R.string.title_activity_settings);
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {

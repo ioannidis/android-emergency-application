@@ -100,6 +100,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         inflater.inflate(R.menu.drive_menu, menu);
         return true;
     }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        this.recreate();
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -122,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drive_activity_main);
         actionBar = getSupportActionBar();
-
+        actionBar.setTitle(R.string.driving_mode_title);
         // Enable back button on actionbar
         Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
 

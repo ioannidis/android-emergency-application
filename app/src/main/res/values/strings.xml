@@ -151,6 +151,9 @@
     <string name="biometric_login">Biometric login</string>
     <string name="biometric_credential">Log in using your biometric credential</string>
     <string name="use_password">Use account password</string>
+    <string name="enter_speed">Enter the speed limit</string>
+    <string name="enter_phone">Enter a valid phone number</string>
+    <string name="enter_mail">Enter a valid email</string>
 
     <string-array name="languages">
         <item>English</item>

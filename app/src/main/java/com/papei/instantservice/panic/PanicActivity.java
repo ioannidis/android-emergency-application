@@ -80,6 +80,7 @@ public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnI
         setContentView(R.layout.activity_panic);
 
         actionBar = getSupportActionBar();
+        actionBar.setTitle(R.string.disability_mode_title);
 
         // Enable back button on actionbar
         Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
@@ -171,6 +172,11 @@ public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnI
     protected void onResume() {
         super.onResume();
         getPreferences();
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        this.recreate();
     }
 
     @Override

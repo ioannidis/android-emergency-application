@@ -77,6 +77,7 @@ public class HomeFragment extends Fragment {
         getPreferences();
     }
 
+
     // Check permission
     public int checkPermission(String permission) {
         int check = ContextCompat.checkSelfPermission(getContext(), permission);

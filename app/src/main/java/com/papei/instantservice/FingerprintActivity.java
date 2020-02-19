@@ -110,6 +110,7 @@ public class FingerprintActivity extends AppCompatActivity {
         biometricLoginButton.setOnClickListener(view -> {
             biometricPrompt.authenticate(promptInfo);
         });
+        this.getSupportActionBar().setTitle(R.string.biometric_login);
     }
     private void startHomeActivity() {
         Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);

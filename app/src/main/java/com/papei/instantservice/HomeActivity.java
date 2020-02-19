@@ -49,6 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         this.bottomNavigationView = findViewById(R.id.bottomNavigationView);
         this.bottomNavigationView.setOnNavigationItemSelectedListener(this.createSelectionListener());
         this.navigateToLastFragment();
+
     }
 
     private void getPreferences() {
@@ -60,10 +61,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(getIntent());
-        overridePendingTransition(0, 0);
+        this.recreate();
     }
 
     @Override

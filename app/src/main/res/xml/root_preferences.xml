@@ -40,7 +40,7 @@
             android:digits="0123456789"
             android:maxLength="3"
             app:defaultValue="50"
-            app:dialogTitle="Enter the speed limit"
+            app:dialogTitle="@string/enter_speed"
             app:useSimpleSummaryProvider="true" />
 
 
@@ -54,14 +54,14 @@
             android:inputType="number"
             android:digits="0123456789"
             android:maxLength="10"
-            app:dialogTitle="Enter a valid phone number"
+            app:dialogTitle="@string/enter_phone"
             app:useSimpleSummaryProvider="true" />
 
         <EditTextPreference
             app:key="emergency_email"
             app:title="@string/emergency_email"
             android:inputType="text"
-            app:dialogTitle="Enter a valid email"
+            app:dialogTitle="@string/enter_mail"
             app:useSimpleSummaryProvider="true" />
 
 
