@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private TextToSpeech textToSpeech;
 
     private SpeechRecognizer speechRecognizer;
+    private Locale locale = null;
 
     private DatabaseConfig dbHandler = new DatabaseConfig(this, null, null, 1);
 
@@ -132,6 +133,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         // Enable back button on actionbar
         Objects.requireNonNull(actionBar).setDisplayHomeAsUpEnabled(true);
 
+        // Preferences
+        getPreferences();
+
         speedViolation = false;
 
         // Initialize speech recognition
@@ -140,8 +144,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         // Initialize text to speech
         textToSpeech = new TextToSpeech(this, this);
 
-        // Preferences
-        getPreferences();
 
         speedTextView = findViewById(R.id.speedTextView);
         violationsButton = findViewById(R.id.violations_button);
@@ -528,7 +530,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     }
 
     void checkLocale(String lang) {
-        Locale locale = new Locale(lang);
+        locale = new Locale(lang);
         Locale.setDefault(locale);
 
         Context context = getBaseContext();
@@ -547,5 +549,19 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         onBackPressed();
         return true;
     }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+        if (locale != null)
+        {
+            newConfig.locale = locale;
+            newConfig.setLocale(locale);
+            Locale.setDefault(locale);
+            getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
+        }
+    }
+
 
 }

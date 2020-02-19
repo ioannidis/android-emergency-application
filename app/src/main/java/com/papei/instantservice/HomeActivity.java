@@ -41,6 +41,8 @@ public class HomeActivity extends AppCompatActivity {
     private String emergencyPhone;
     private String emergencyEmail;
 
+    private Locale locale = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     void checkLocale(String lang) {
-        Locale locale = new Locale(lang);
+        locale = new Locale(lang);
         Locale.setDefault(locale);
 
         Context context = getBaseContext();
@@ -202,5 +204,18 @@ public class HomeActivity extends AppCompatActivity {
         FirebaseMessaging messaging = FirebaseMessaging.getInstance();
 
         messaging.subscribeToTopic(getString(R.string.alerts_notif_topic));
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+        if (locale != null)
+        {
+            newConfig.locale = locale;
+            newConfig.setLocale(locale);
+            Locale.setDefault(locale);
+            getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
+        }
     }
 }

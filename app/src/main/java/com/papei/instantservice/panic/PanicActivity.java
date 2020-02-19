@@ -65,6 +65,7 @@ public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnI
     private ActionBar actionBar;
 
     private SharedPreferences sharedPreferences;
+    private Locale locale = null;
 
     private SensorManager sensorManager;
     private Sensor accelerometer;
@@ -326,7 +327,7 @@ public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnI
     }
 
     void checkLocale(String lang) {
-        Locale locale = new Locale(lang);
+        locale = new Locale(lang);
         Locale.setDefault(locale);
 
         Context context = getBaseContext();
@@ -420,8 +421,15 @@ public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnI
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        // refresh your views here
+    public void onConfigurationChanged(Configuration newConfig)
+    {
         super.onConfigurationChanged(newConfig);
+        if (locale != null)
+        {
+            newConfig.locale = locale;
+            newConfig.setLocale(locale);
+            Locale.setDefault(locale);
+            getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
+        }
     }
 }
