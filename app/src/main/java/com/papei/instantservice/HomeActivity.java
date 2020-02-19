@@ -1,6 +1,7 @@
 package com.papei.instantservice;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -32,6 +34,9 @@ public class HomeActivity extends AppCompatActivity {
     private ActionBar actionBar;
     private FirebaseUser user;
 
+    private String emergencyPhone;
+    private String emergencyEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +47,8 @@ public class HomeActivity extends AppCompatActivity {
         this.fragmentManager = getSupportFragmentManager();
         this.subscribeToTopics();
         this.navigateHomeFragment();
+
+        getPreferences();
 
         BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
         nav.setSelectedItemId(R.id.homeMenuItem);
@@ -62,10 +69,25 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    private void getPreferences() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        emergencyPhone = sharedPreferences.getString("emergency_phone","");
+        emergencyEmail = sharedPreferences.getString("emergency_email","");
+    }
+
     @Override
     protected void onRestart() {
         super.onRestart();
-        recreate();
+        finish();
+        overridePendingTransition( 0, 0);
+        startActivity(getIntent());
+        overridePendingTransition( 0, 0);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getPreferences();
     }
 
     @Override
