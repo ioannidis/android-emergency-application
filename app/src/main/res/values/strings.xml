@@ -109,7 +109,7 @@
     <string name="settings_help">Click the dots on the top right corner to edit the application settings.  You can configure the speed limit! (Default 50 kmh)</string>
     <string name="speech_recognition_help_label">Speech Recognition</string>
     <string name="speech_recognition_help">On the main screen, click the floating button with the microphone to enable speech recognition! You must start your command saying \'speed\' or \'speedometer\' and then one of the following words:</string>
-    <string name="speech_recognition_help_2">1. \'start\' to enable the speed capture. 2. \'stop\' to disable screen capture. 3. \'violations\' to go to violations list. 4. \'map\' to go to map.</string>
+    <string name="speech_recognition_help_2">1. \'start\' to enable the speed capture. 2. \'stop\' to disable speed capture. 3. \'violations\' to go to violations list. 4. \'map\' to go to map.</string>
 
     <string name="panic_speech_recognition_help">If you click the floating button with the microphone you can enable speech recognition! You can execute your command by saying one of the following words:</string>
     <string name="panic_speech_recognition_help_2">1. \'Send message\' to send the emergency email and text message. 2. \'Call Hospital\' to immediately call the hospital. 3. \'Call emergency contact\' to immediately call your emergency contact.</string>
