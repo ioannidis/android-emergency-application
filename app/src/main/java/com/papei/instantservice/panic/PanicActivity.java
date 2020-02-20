@@ -36,7 +36,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.papei.instantservice.R;
 import com.papei.instantservice.SettingsActivity;
-import com.papei.instantservice.drive.HelpActivity;
+import com.papei.instantservice.panic.HelpActivity;
 
 import java.util.List;
 import java.util.Locale;

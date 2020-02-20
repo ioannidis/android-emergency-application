@@ -84,8 +84,8 @@
     <string name="panic_button_help_label">Κουμπί πανικού</string>
     <string name="settings_help">Κάντε κλικ στις τελείες στην επάνω δεξιά γωνία για να επεξεργαστείτε τις ρυθμίσεις της εφαρμογής. Μπορείτε να ρυθμίσετε το όριο ταχύτητας! (Προεπιλογή 50 kmh)</string>
     <string name="settings_help_label">Ρυθμίσεις</string>
-    <string name="speech_recognition_help">On the main screen, click the floating button with the microphone to enable speech recognition! You must start your command saying \'speed\' or \'speedometer\' and then one of the following words:</string>
-    <string name="speech_recognition_help_2">1. «εκκίνηση» για να ενεργοποιήσετε τη σύλληψη ταχύτητας. 2. \'stop\' για να απενεργοποιήσετε τη λήψη οθόνης. 3. «παραβιάσεις» για να μεταβείτε στη λίστα παραβιάσεων. 4. \'χάρτη\' για να πάτε στο χάρτη.</string>
+    <string name="speech_recognition_help">Αν κάνετε κλικ στο κουμπί με το μικρόφωνο, μπορείτε να ενεργοποιήσετε την αναγνώριση ομιλίας! Μπορείτε να εκτελέσετε την εντολή σας ξεκινόντας με τις λέξεις \'speed\' ή \'speedometer\' και στη συνεχεια λέγοντας μία από τις ακόλουθες λέξεις:</string>
+    <string name="speech_recognition_help_2">1. \'start\' για να ενεργοποιήσετε τη καταγραφή ταχύτητας. 2. \'stop\' για να απενεργοποιήσετε τη καταγραφή ταχύτητας. 3. \'violations\' για να μεταβείτε στη λίστα παραβιάσεων. 4. \'map\' για να πάτε στο χάρτη.</string>
     <string name="speech_recognition_help_label">Αναγνώρισης ομιλίας</string>
     <string name="disability_mode_button">Λειτουργία για άτομα με ειδικές ανάγκες</string>
     <string name="disability_mode_help_label">Λειτουργία για άτομα με ειδικές ανάγκες</string>

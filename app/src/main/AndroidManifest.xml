@@ -102,6 +102,9 @@
             android:name=".panic.PanicActivity"
             android:label="@string/disability_mode_title"
             android:configChanges="layoutDirection|locale"/>
+        <activity
+            android:name=".panic.HelpActivity"
+            android:configChanges="layoutDirection|locale"/>
     </application>
 
 </manifest>
