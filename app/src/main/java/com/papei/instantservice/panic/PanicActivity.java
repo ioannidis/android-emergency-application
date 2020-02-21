@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -358,8 +359,8 @@ public class PanicActivity extends AppCompatActivity implements TextToSpeech.OnI
     private void sendMessages() {
         // SMS
         try {
-//                SmsManager smsManager = SmsManager.getDefault();
-//                smsManager.sendTextMessage(emergencyPhone,null, message,null,null);
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(emergencyPhone,null, message,null,null);
             Toast.makeText(PanicActivity.this, R.string.sms_success, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(this, R.string.sms_fail, Toast.LENGTH_SHORT).show();

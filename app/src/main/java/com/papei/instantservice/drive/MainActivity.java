@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -325,7 +326,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                         speedViolation = true;
 
                         // Create db record
-                        ViolationModel violationModel = new ViolationModel(currentLongitude, currentLatitude, SpeedConverter.mPerSecToKmPerHr(currentSpeed), new Timestamp(System.currentTimeMillis()));
+                        ViolationModel violationModel = new ViolationModel(currentLongitude, currentLatitude, (int)currentSpeed, new Timestamp(System.currentTimeMillis()));
 
                         // Save the db record
                         dbHandler.addViolation(violationModel);
@@ -470,8 +471,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private void sendMessages() {
         // SMS
         try {
-//                SmsManager smsManager = SmsManager.getDefault();
-//                smsManager.sendTextMessage(emergencyPhone,null, message,null,null);
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(emergencyPhone,null, message,null,null);
             Toast.makeText(this, R.string.sms_success, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(this, R.string.sms_fail, Toast.LENGTH_SHORT).show();

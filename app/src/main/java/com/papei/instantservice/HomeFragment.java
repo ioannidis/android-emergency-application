@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,8 +56,8 @@ public class HomeFragment extends Fragment {
         panicButton.setOnClickListener((View v) -> {
 
             try {
-//                SmsManager smsManager = SmsManager.getDefault();
-//                smsManager.sendTextMessage(emergencyPhone,null, message,null,null);
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(emergencyPhone,null, message,null,null);
                 Toast.makeText(getContext(), R.string.sms_success, Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 Toast.makeText(getContext(), R.string.sms_fail, Toast.LENGTH_SHORT).show();
