@@ -331,7 +331,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                         // Save the db record
                         dbHandler.addViolation(violationModel);
 
-                        Toast.makeText(this, violationModel.toString(), Toast.LENGTH_LONG).show();
+//                        Toast.makeText(this, violationModel.toString(), Toast.LENGTH_LONG).show();
                     }
 
                 } else {
