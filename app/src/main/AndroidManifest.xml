@@ -13,29 +13,30 @@
 
     <application
         android:allowBackup="true"
+        android:configChanges="layoutDirection|locale"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning"
-        android:configChanges="layoutDirection|locale">
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".doctor.SendDoctorActivity"></activity>
         <activity
             android:name=".AboutActivity"
-            android:label="@string/about"
-            android:configChanges="layoutDirection|locale" />
+            android:configChanges="layoutDirection|locale"
+            android:label="@string/about" />
         <activity
             android:name=".HomeHelpActivity"
-            android:label="@string/title_activity_help"
-            android:configChanges="layoutDirection|locale"/>
+            android:configChanges="layoutDirection|locale"
+            android:label="@string/title_activity_help" />
         <activity
             android:name=".alerts.AlertsHelpActivity"
-            android:label="@string/title_activity_help"
-            android:configChanges="layoutDirection|locale"/>
+            android:configChanges="layoutDirection|locale"
+            android:label="@string/title_activity_help" />
         <activity
             android:name=".doctor.DoctorHelpActivity"
-            android:label="@string/title_activity_help"
-            android:configChanges="layoutDirection|locale"/>
+            android:configChanges="layoutDirection|locale"
+            android:label="@string/title_activity_help" />
         <activity
             android:name=".alerts.CreateAlertActivity"
             android:label="Create Alert" />
@@ -53,10 +54,12 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <activity android:name=".FingerprintActivity"
-            android:configChanges="layoutDirection|locale"/>
-        <activity android:name=".HomeActivity"
-            android:configChanges="layoutDirection|locale"/>
+        <activity
+            android:name=".FingerprintActivity"
+            android:configChanges="layoutDirection|locale" />
+        <activity
+            android:name=".HomeActivity"
+            android:configChanges="layoutDirection|locale" />
         <activity
             android:name=".SettingsActivity"
             android:configChanges="layoutDirection|locale"
@@ -68,12 +71,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".drive.HelpActivity"
-            android:configChanges="layoutDirection|locale"/>
-        <activity android:name=".drive.AboutActivity"
-            android:configChanges="layoutDirection|locale"/>
-        <activity android:name=".drive.ViolationDetailsActivity"
-            android:configChanges="layoutDirection|locale"/>
+        <activity
+            android:name=".drive.HelpActivity"
+            android:configChanges="layoutDirection|locale" />
+        <activity
+            android:name=".drive.AboutActivity"
+            android:configChanges="layoutDirection|locale" />
+        <activity
+            android:name=".drive.ViolationDetailsActivity"
+            android:configChanges="layoutDirection|locale" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -88,23 +94,23 @@
 
         <activity
             android:name=".drive.MapsActivity"
-            android:label="@string/title_activity_maps"
-            android:configChanges="layoutDirection|locale"/>
+            android:configChanges="layoutDirection|locale"
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".drive.ViolationsActivity"
-            android:label="@string/title_activity_violations"
-            android:configChanges="layoutDirection|locale"/>
+            android:configChanges="layoutDirection|locale"
+            android:label="@string/title_activity_violations" />
         <activity
             android:name=".drive.MainActivity"
-            android:label="@string/driving_mode_title"
-            android:configChanges="layoutDirection|locale"/>
+            android:configChanges="layoutDirection|locale"
+            android:label="@string/driving_mode_title" />
         <activity
             android:name=".panic.PanicActivity"
-            android:label="@string/disability_mode_title"
-            android:configChanges="layoutDirection|locale"/>
+            android:configChanges="layoutDirection|locale"
+            android:label="@string/disability_mode_title" />
         <activity
             android:name=".panic.HelpActivity"
-            android:configChanges="layoutDirection|locale"/>
+            android:configChanges="layoutDirection|locale" />
     </application>
 
 </manifest>

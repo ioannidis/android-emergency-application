@@ -1,11 +1,9 @@
 package com.papei.instantservice.doctor;
 
-import android.app.Service;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,7 +31,6 @@ import com.papei.instantservice.R;
 import java.util.ArrayList;
 
 import static android.content.Context.VIBRATOR_SERVICE;
-import static androidx.core.content.ContextCompat.getSystemService;
 
 public class DoctorFragment extends Fragment {
     private FirebaseUser user;
@@ -60,7 +58,7 @@ public class DoctorFragment extends Fragment {
         this.messageEditText.setOnEditorActionListener(createEditorActionListener());
         this.doctorProgressLinearLayout = view.findViewById(R.id.doctorProgressLinearLayout);
         this.messagesLinearLayout = view.findViewById(R.id.messagesLinearLayout);
-
+        this.setupHiddenDoctorButton(view);
         return view;
     }
 
@@ -138,5 +136,14 @@ public class DoctorFragment extends Fragment {
     private void vibrate() {
         Vibrator vibrator = (Vibrator) getActivity().getSystemService(VIBRATOR_SERVICE);
         vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+    }
+
+    private void setupHiddenDoctorButton(View view) {
+        FloatingActionButton hiddenDoctorButton = view.findViewById(R.id.hiddenDoctorButton);
+
+        hiddenDoctorButton.setOnClickListener(v -> {
+            Intent sendDoctorIntent = new Intent(getContext(), SendDoctorActivity.class);
+            startActivity(sendDoctorIntent);
+        });
     }
 }
