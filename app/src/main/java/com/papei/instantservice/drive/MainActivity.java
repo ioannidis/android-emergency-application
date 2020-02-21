@@ -472,7 +472,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         // SMS
         try {
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(emergencyPhone,null, message,null,null);
+                smsManager.sendTextMessage(emergencyPhone,null,
+                        "I HAD A CAR ACCIDENT!!! Please come as soon as possible! Its urgent!!!" +
+                                "\nMy location is https://www.google.com/maps/search/?api=1&query=" + currentLatitude + "," + currentLongitude
+                        ,null,null);
             Toast.makeText(this, R.string.sms_success, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(this, R.string.sms_fail, Toast.LENGTH_SHORT).show();
