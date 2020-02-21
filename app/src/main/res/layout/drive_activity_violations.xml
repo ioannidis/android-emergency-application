@@ -23,7 +23,7 @@
             android:id="@+id/filters_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Filters"
+            android:text="@string/filters"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -37,21 +37,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="All"
+                android:text="@string/all"
                 android:onClick="radioButtonCheck"/>
 
             <RadioButton
                 android:id="@+id/filter_week"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Last week"
+                android:text="@string/last_week"
                 android:onClick="radioButtonCheck"/>
 
             <RadioButton
                 android:id="@+id/filter_custom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Custom range"
+                android:text="@string/custom_range"
                 android:onClick="radioButtonCheck"/>
 
         </RadioGroup>
@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:text="From" />
+                android:text="@string/from" />
 
             <TextView
                 android:id="@+id/date_from_textview"
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:text="To" />
+                android:text="@string/to" />
 
             <TextView
                 android:id="@+id/date_to_textview"
@@ -115,13 +115,13 @@
                 android:id="@+id/filter_reset_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Reset" />
+                android:text="@string/reset" />
 
             <Button
                 android:id="@+id/filter_ok_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ok" />
+                android:text="@string/ok" />
         </TableRow>
 
     </LinearLayout>

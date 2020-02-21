@@ -130,4 +130,15 @@
     <string name="warning_speed">Προειδοποίηση! Έχετε υπερβεί το όριο ταχύτητας.</string>
     <string name="home_unknown_speech_command">Παρακαλώ πείτε ένα από τα παρακάτω: doctor, alerts, driving mode, disability mode.</string>
     <string name="about">Περί</string>
+    <string name="all">Όλα</string>
+    <string name="custom_range">Προσαρμοσμένο εύρος</string>
+    <string name="enter_mail">Εισάγετε σωστό email</string>
+    <string name="enter_phone">Εισάγετε σωστό αριθμό τηλεφώνου</string>
+    <string name="enter_speed">Εισάγετε το όριο ταχύτητας</string>
+    <string name="filters">Φίλτρα</string>
+    <string name="from">Από</string>
+    <string name="last_week">Προηγούμενη βδομάδα</string>
+    <string name="ok">Οκ</string>
+    <string name="reset">Επαναφορά</string>
+    <string name="to">Πρός</string>
 </resources>
